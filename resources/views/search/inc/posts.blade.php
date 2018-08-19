@@ -37,6 +37,32 @@ if (!isset($cacheExpiration)) {
 		} else {
 			$postImg = resize(config('larapen.core.picture.default'));
 		}
+		
+		$postUserImg = '';
+		
+		$p_company = \App\Models\Company::where('id', $post->company_id)->first();
+		
+		if($post->company_id && !is_null($p_company->logo)){
+
+			$postUserImg = asset('storage/' . $p_company->logo);
+
+		} else {
+
+			$p_user = \App\Models\User::where('id', $post->user_id)->first();
+
+			if(!empty($p_user->gravatar)){
+				$postUserImg = $p_user->gravatar;
+			}else{
+				$postUserImg = url('images/user.jpg');
+
+			}
+					
+
+		}
+	
+		
+		
+		
   
 		// Get the Post's City
 		$cacheId = config('country.code') . '.city.' . $post->city_id;
@@ -93,7 +119,7 @@ if (!isset($cacheExpiration)) {
 				<span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span>
 				<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
 				<a href="{{ lurl($post->uri, $attr) }}">
-					<img class="thumbnail no-margin" src="{{ $postImg }}" alt="img">
+					<img class="thumbnail no-margin" src="{{ $postUserImg }}" alt="img">
 				</a>
 			</div>
 		</div>
@@ -118,7 +144,11 @@ if (!isset($cacheExpiration)) {
 					- <span class="item-location"><i class="fa fa-map-marker"></i>&nbsp;
 						<a href="{!! qsurl(trans('routes.v-search', ['countryCode' => config('country.icode')]), array_merge(request()->except(['l', 'location']), ['l'=>$post->city_id])) !!}" class="info-link">{{ $city->name }}</a> {{ (isset($post->distance)) ? '- ' . round(lengthPrecision($post->distance), 2) . unitOfLength() : '' }}
 					  </span>
+
 				</span>
+				<p>
+					{!! str_limit($post->description, 200) !!}
+				</p>
 			</div>
 
 			@if (config('plugins.reviews.installed'))
@@ -130,7 +160,7 @@ if (!isset($cacheExpiration)) {
 		</div>
 
 		<div class="col-sm-3 text-right price-box">
-			<h4 class="item-price">
+			<!--<h4 class="item-price">
 				@if (isset($liveCatType) and !in_array($liveCatType, ['non-salable']))
 					@if ($post->price > 0)
 						{!! \App\Helpers\Number::money($post->price) !!}
@@ -140,7 +170,7 @@ if (!isset($cacheExpiration)) {
 				@else
 					{{ '--' }}
 				@endif
-			</h4>
+			</h4> -->
             @if (isset($package) and !empty($package))
                 @if ($package->has_badge == 1)
                     <a class="btn btn-danger btn-sm make-favorite"><i class="fa fa-certificate"></i><span> {{ $package->short_name }} </span></a>&nbsp;

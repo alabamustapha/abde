@@ -202,7 +202,9 @@ class DetailsController extends FrontController
 		];
 		
 		// Get Custom Fields
-		$customFields = $this->getPostFieldsValues($catNestedIds, $post->id);
+		$customFields = $this->getPostFieldsValuesUsingPostType($post->post_type_id, $post->id);
+
+		
 		view()->share('customFields', $customFields);
 		
 		// Get Post's user decision about comments activation

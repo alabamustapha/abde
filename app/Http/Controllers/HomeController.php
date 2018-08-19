@@ -69,6 +69,8 @@ class HomeController extends FrontController
 			}
 			
 			return $sections;
+
+			
 		});
 		
 		if ($data['sections']->count() > 0) {
@@ -97,7 +99,7 @@ class HomeController extends FrontController
 		
 		// Get SEO
 		$this->setSeo();
-		
+	
 		return view('home.index', $data);
 	}
 	

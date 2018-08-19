@@ -126,15 +126,21 @@ if (!auth()->check()) {
 							</span>
 						</span>
 						
+						<div class="ads-descrition" style="padding: 30px; background-color: #fff; margin-bottom: 10px;">
+								{!! transformDescription($post->description) !!}
+						</div>
+
+						<!--
 						<div class="ads-image">
+							
 							@if (!in_array($post->category->type, ['non-salable']))
-								<h1 class="pricetag">
+								{{-- <h1 class="pricetag"> --}}
 									@if ($post->price > 0)
-										{!! \App\Helpers\Number::money($post->price) !!}
+										{{-- {!! \App\Helpers\Number::money($post->price) !!} --}}
 									@else
-										{!! \App\Helpers\Number::money(' --') !!}
+										{{-- {!! \App\Helpers\Number::money(' --') !!} --}}
 									@endif
-								</h1>
+								{{-- </h1> --}}
 							@endif
 							@if (count($post->pictures) > 0)
 								<ul class="bxslider">
@@ -168,6 +174,7 @@ if (!auth()->check()) {
 								</div>
 							@endif
 						</div>
+						-->
 						<!--ads-image-->
 						
 						
@@ -217,6 +224,7 @@ if (!auth()->check()) {
 											</div>
 											@if (!in_array($post->category->type, ['non-salable']))
 												<!-- Price / Salary -->
+												<!--
 												<div class="detail-line-lite col-md-6 col-sm-6 col-xs-6">
 													<div>
 														<span>
@@ -234,14 +242,15 @@ if (!auth()->check()) {
 														</span>
 													</div>
 												</div>
+												-->
 											@endif
 											<div style="clear: both;"></div>
 											<hr>
 											
 											<!-- Description -->
-											<div class="detail-line-content">
+											{{-- <div class="detail-line-content">
 												{!! transformDescription($post->description) !!}
-											</div>
+											</div> --}}
 											
 											<!-- Custom Fields -->
 											@include('post.inc.fields-values')
@@ -337,12 +346,14 @@ if (!auth()->check()) {
 										<a class="btn btn-default" data-toggle="modal" href="{{ $contactSellerURL }}"><i class="icon-mail-2"></i> {{ t('Send a message') }} </a>
 									@endif
 								@endif
+								<!--
 								@if ($post->phone_hidden != 1 and !empty($post->phone))
 									<a href="{{ $phoneLink }}" {!! $phoneLinkAttr !!} class="btn btn-success showphone">
 										<i class="icon-phone-1"></i>
 										{!! $phone !!}{{-- t('View phone') --}}
 									</a>
 								@endif
+								-->
 							</div>
 						</div>
 					</div>
@@ -365,16 +376,46 @@ if (!auth()->check()) {
 							<div class="panel-content user-info">
 								<div class="panel-body text-center">
 									<div class="seller-info">
+										
+										<div class="row text-center">
+											<?php
+												
+												$postUserImg = '';
+		
+												$p_company = \App\Models\Company::where('id', $post->company_id)->first();
+												
+												if($post->company_id && !is_null($p_company->logo)){
+
+													$postUserImg = asset('storage/' . $p_company->logo);
+
+												} else {
+
+													$p_user = \App\Models\User::where('id', $post->user_id)->first();
+
+													if(!empty($p_user->gravatar)){
+														$postUserImg = $p_user->gravatar;
+													}else{
+														$postUserImg = url('images/user.jpg');
+
+													}
+															
+
+												}	
+											?>
+											
+											<img class="flag-icon" src="{{ $postUserImg }}" style="text-align: center;" width="50">
+										</div>
+										
 										@if (isset($post->contact_name) and $post->contact_name != '')
 											@if (isset($post->user) and !empty($post->user))
 												<h3 class="no-margin">
 													<?php $attr = ['countryCode' => config('country.icode'), 'id' => $post->user->id]; ?>
 													<a href="{{ lurl(trans('routes.v-search-user', $attr), $attr) }}">
-														{{ $post->contact_name }}
+														{{ $post->user->name }}
 													</a>
 												</h3>
 											@else
-												<h3 class="no-margin">{{ $post->contact_name }}</h3>
+												<h3 class="no-margin">{{ $post->user->name }}</h3>
 											@endif
 										@endif
 										<p>
@@ -410,12 +451,14 @@ if (!auth()->check()) {
 														<i class="icon-mail-2"></i> {{ t('Send a message') }}
 													</a>
 												@endif
+												<!--
 												@if ($post->phone_hidden != 1 and !empty($post->phone))
 													<a href="{{ $phoneLink }}" {!! $phoneLinkAttr !!} class="btn btn-success btn-block showphone">
 														<i class="icon-phone-1"></i>
 														{!! $phone !!}{{-- t('View phone') --}}
 													</a>
 												@endif
+												-->
 											@endif
 										@else
 											@if ($post->email != '')
@@ -423,12 +466,14 @@ if (!auth()->check()) {
 													<i class="icon-mail-2"></i> {{ t('Send a message') }}
 												</a>
 											@endif
+											<!--
 											@if ($post->phone_hidden != 1 and !empty($post->phone))
 												<a href="{{ $phoneLink }}" {!! $phoneLinkAttr !!} class="btn btn-success btn-block showphone">
 													<i class="icon-phone-1"></i>
 													{!! $phone !!}{{-- t('View phone') --}}
 												</a>
 											@endif
+											-->
 										@endif
 									</div>
 								</div>

@@ -206,7 +206,7 @@ class CreateController extends FrontController
 		session(['tmpPostId' => $post->id]);
 		
 		// Custom Fields
-		$this->createPostFieldsValues($post, $request);
+		$this->createPostFieldsValuesUsingPostType($post, $request);
 		
 		// The Post's creation message
 		if (getSegment(2) == 'create') {

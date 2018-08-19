@@ -16,6 +16,7 @@
 namespace App\Models;
 
 
+use App\Models\PostValue;
 use Larapen\Admin\app\Models\Crud;
 
 class PostTypeField extends BaseModel
@@ -145,18 +146,19 @@ class PostTypeField extends BaseModel
 		if (!isset($PostTypeId)) {
 			return collect($fields);
 		}
+
 		
-		// Make sure that the category nested IDs variable are not empty
-		if (empty($PostTypeId) && empty($PostTypeId)) {
-			return collect($fields);
-		}
+		
 		
 		// Get Post's Custom Fields values
 		$postFieldsValues = collect([]);
 		if (!empty($postId) && trim($postId) != '') {
 			$postFieldsValues = PostValue::where('post_id', $postId)->get();
+			
 			$postFieldsValues = self::keyingByFieldId($postFieldsValues);
 		}
+
+		
 		
 		// Get PostTypeFields fields
 		

@@ -23,6 +23,7 @@ if (!isset($cacheExpiration)) {
 		
 				<div class="relative content featured-list-row clearfix">
 					
+					
 					<div class="large-12 columns">
 						<div class="no-margin featured-list-slider owl-carousel owl-theme">
 							<?php
@@ -64,13 +65,14 @@ if (!isset($cacheExpiration)) {
 										</span>
 										<span class="item-name">{{ str_limit($post->title, 70) }}</span>
 										
-										@if (config('plugins.reviews.installed'))
+										{{-- @if (config('plugins.reviews.installed'))
 											@if (view()->exists('reviews::ratings-list'))
 												@include('reviews::ratings-list')
 											@endif
 										@endif
-										
-										<span class="price">
+										 --}}
+
+										{{-- <span class="price">
 											@if (isset($liveCatType) and !in_array($liveCatType, ['non-salable']))
 												@if ($post->price > 0)
 													{!! \App\Helpers\Number::money($post->price) !!}
@@ -80,7 +82,7 @@ if (!isset($cacheExpiration)) {
 											@else
 												{{ '--' }}
 											@endif
-										</span>
+										</span> --}}
 									</a>
 								</div>
 							<?php endforeach; ?>

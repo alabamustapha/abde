@@ -93,6 +93,7 @@ class BaseController extends FrontController
         
 
         // LEFT MENU VARS
+        
         if (config('settings.listing.left_sidebar')) {
             // Count Categories Posts
             $sql = 'SELECT sc.id, c.parent_id, count(*) as total' . '

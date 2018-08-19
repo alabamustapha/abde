@@ -96,6 +96,7 @@ class PostRequest extends Request
 		// Custom Fields
 		if (!isFromApi()) {
 			$cfRequest = new CustomFieldRequest();
+			
 			$rules = $rules + $cfRequest->rules();
 			$this->cfMessages = $cfRequest->messages();
 		}

@@ -94,6 +94,108 @@ trait CustomFieldTrait
      * @param Request $request
      * @return array
      */
+    public function createPostFieldsValuesUsingPostType(Post $post, Request $request)
+    {
+        $postValues = [];
+        
+        if (empty($post)) {
+            return $postValues;
+        }
+        
+        // Delete all old PostValue entries, if exist
+        $oldPostValues = PostValue::with(['field'])->where('post_id', $post->id)->get();
+        if ($oldPostValues->count() > 0) {
+            foreach ($oldPostValues as $oldPostValue) {
+                if ($oldPostValue->field->type == 'file') {
+                    if ($request->hasFile('cf.' . $oldPostValue->field->tid)) {
+                        $oldPostValue->delete();
+                    }
+                } else {
+                    $oldPostValue->delete();
+                }
+            }
+        }
+		
+  
+		// Get Category's Fields details
+        $fields = PostTypeField::getFields($post->post_type_id);
+        if ($fields->count() > 0) {
+            foreach ($fields as $field) {
+                if ($field->type == 'file') {
+                    if ($request->hasFile('cf.' . $field->tid)) {
+                        // Get file's destination path
+                        $destinationPath = 'files/' . strtolower($post->country_code) . '/' . $post->id;
+                        
+                        // Get the file
+                        $file = $request->file('cf.' . $field->tid);
+                        
+                        // Check if the file is valid
+                        if (!$file->isValid()) {
+                            continue;
+                        }
+                        
+                        // Get filename & file path
+                        $filename = $file->getClientOriginalName();
+                        $extension = $file->getClientOriginalExtension();
+                        $newFilename = md5($filename . time()) . '.' . $extension;
+                        $filePath = $destinationPath . '/' . $newFilename;
+                        
+                        $postValueInfo = [
+                            'post_id'  => $post->id,
+                            'field_id' => $field->tid,
+                            'value'    => $filePath,
+                        ];
+                        
+                        $newPostValue = new PostValue($postValueInfo);
+                        $newPostValue->save();
+                        
+                        Storage::put($newPostValue->value, File::get($file->getrealpath()));
+                        
+                        $postValues[$newPostValue->id] = $newPostValue;
+                    }
+                } else {
+                    if ($request->filled('cf.' . $field->tid)) {
+                        // Get the input
+                        $input = $request->input('cf.' . $field->tid);
+                        
+                        if (is_array($input)) {
+                            foreach ($input as $optionId => $optionValue) {
+                                $postValueInfo = [
+                                    'post_id'   => $post->id,
+                                    'field_id'  => $field->tid,
+                                    'option_id' => $optionId,
+                                    'value'     => $optionValue,
+                                ];
+                                
+                                $newPostValue = new PostValue($postValueInfo);
+                                $newPostValue->save();
+                                $postValues[$newPostValue->id][$optionId] = $newPostValue;
+                            }
+                        } else {
+                            $postValueInfo = [
+                                'post_id'  => $post->id,
+                                'field_id' => $field->tid,
+                                'value'    => $input,
+                            ];
+                            
+                            $newPostValue = new PostValue($postValueInfo);
+                            $newPostValue->save();
+                            $postValues[$newPostValue->id] = $newPostValue;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return $postValues;
+    }
+    /**
+     * Create & Update for Custom Fields
+     *
+     * @param Post $post
+     * @param Request $request
+     * @return array
+     */
     public function createPostFieldsValues(Post $post, Request $request)
     {
         $postValues = [];
@@ -206,6 +308,31 @@ trait CustomFieldTrait
     {
         // Get the Post's Custom Fields by its Parent Category
         $customFields = CategoryField::getFields($catNestedIds, $postId);
+        
+        // Get the Post's Custom Fields that have a value
+        $postValue = [];
+        if ($customFields->count() > 0) {
+            foreach ($customFields as $key => $field) {
+                if (!empty($field->default)) {
+                    $postValue[$key] = $field;
+                }
+            }
+        }
+        
+        return collect($postValue);
+    }
+   
+    /**
+     * Get Post's Custom Fields Values
+     *
+     * @param $postTypeId
+     * @param $postId
+     * @return \Illuminate\Support\Collection
+     */
+    public function getPostFieldsValuesUsingPostType($postTypeId, $postId)
+    {
+        // Get the Post's Custom Fields by its Parent Category
+        $customFields = PostTypeField::getFields($postTypeId, $postId);
         
         // Get the Post's Custom Fields that have a value
         $postValue = [];

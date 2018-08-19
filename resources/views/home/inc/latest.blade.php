@@ -56,6 +56,28 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 					} else {
 						$postImg = resize(config('larapen.core.picture.default'));
 					}
+
+						$postUserImg = '';
+		
+						$p_company = \App\Models\Company::where('id', $post->company_id)->first();
+						
+						if($post->company_id && !is_null($p_company->logo)){
+
+							$postUserImg = asset('storage/' . $p_company->logo);
+
+						} else {
+
+							$p_user = \App\Models\User::where('id', $post->user_id)->first();
+
+							if(!empty($p_user->gravatar)){
+								$postUserImg = $p_user->gravatar;
+							}else{
+								$postUserImg = url('images/user.jpg');
+
+							}
+									
+
+						}
 		
 					// Get the Post's City
 					$cacheId = config('country.code') . '.city.' . $post->city_id;
@@ -106,7 +128,7 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 								<span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span>
 								<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
 								<a href="{{ lurl($post->uri, $attr) }}">
-									<img class="thumbnail no-margin" src="{{ $postImg }}" alt="img">
+									<img class="thumbnail no-margin" src="{{ $postUserImg }}" alt="img">
 								</a>
 							</div>
 						</div>
@@ -134,16 +156,17 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 							</span>
 							</div>
 							
+							{{-- 							
 							@if (config('plugins.reviews.installed'))
 								@if (view()->exists('reviews::ratings-list'))
 									@include('reviews::ratings-list')
 								@endif
-							@endif
+							@endif --}}
 						
 						</div>
 						
 						<div class="{{ $colPriceBox }} text-right price-box">
-							<h4 class="item-price">
+							{{-- <h4 class="item-price">
 								@if (isset($liveCatType) and !in_array($liveCatType, ['non-salable']))
 									@if ($post->price > 0)
 										{!! \App\Helpers\Number::money($post->price) !!}
@@ -153,7 +176,13 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 								@else
 									{{ '--' }}
 								@endif
-							</h4>
+							</h4> --}}
+
+							
+							<p>
+								{!! str_limit($post->description, 200) !!}
+							</p>
+							
 							@if (isset($package) and !empty($package))
 								@if ($package->has_badge == 1)
 									<a class="btn btn-danger btn-sm make-favorite"><i class="fa fa-certificate"></i><span> {{ $package->short_name }} </span></a>&nbsp;
@@ -167,6 +196,7 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 							@else
 								<a class="btn btn-default btn-sm make-favorite" id="{{ $post->id }}"><i class="fa fa-heart"></i><span> {{ t('Save') }} </span></a>
 							@endif
+
 						</div>
 					</div>
 					<?php endforeach; ?>

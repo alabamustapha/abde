@@ -49,6 +49,8 @@ return [
     'Sell and Buy products and services on :app_name in Minutes' => '<strong>Sell</strong> and <strong>Buy</strong> products and services on :app_name in Minutes',
     'Sell, Buy and Rent products and services on :app_name in Minutes' => '<strong>Sell</strong>, <strong>Buy</strong> and <strong>Rent</strong> products and services on :app_name in Minutes',
     'Post Free Ads' => 'Post Free Ads',
+    'Publisher' => 'Publisher',
+    'Select a publisher' => 'Select a publisher',
     'Start Now!' => 'Start Now!',
     'e.g. Smartphone' => 'e.g. Smartphone',
     'All Categories' => 'All Categories',
