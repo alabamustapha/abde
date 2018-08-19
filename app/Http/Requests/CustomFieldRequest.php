@@ -15,8 +15,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\CategoryField;
 use App\Models\PostValue;
+use App\Models\CategoryField;
+use App\Models\PostTypeField;
 use Illuminate\Support\Facades\Storage;
 
 class CustomFieldRequest extends Request
@@ -31,6 +32,7 @@ class CustomFieldRequest extends Request
 	public function rules()
 	{
 		$request = request();
+		
 		if ($this->has('parent_id') && $this->has('category_id')) {
 			$request = $this;
 		}
@@ -44,7 +46,7 @@ class CustomFieldRequest extends Request
 		];
 		
 		// Custom Fields
-		$this->customFields = CategoryField::getFields($catNestedIds);
+		$this->customFields = PostTypeField::getFields($request->postTypeId);
 		if ($this->customFields->count() > 0) {
 			foreach ($this->customFields as $field) {
 				$cfRules = '';

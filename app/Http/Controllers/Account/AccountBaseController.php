@@ -19,6 +19,7 @@ use App\Http\Controllers\FrontController;
 use App\Models\Post;
 use App\Models\Message;
 use App\Models\Payment;
+use App\Models\Company;
 use App\Models\SavedPost;
 use App\Models\SavedSearch;
 use App\Models\Scopes\VerifiedScope;
@@ -57,6 +58,7 @@ abstract class AccountBaseController extends FrontController
     	// Get & Share Countries
         $this->countries = CountryLocalizationHelper::transAll(CountryLocalization::getCountries());
         view()->share('countries', $this->countries);
+        
         
         // Share User Info
         view()->share('user', auth()->user());
@@ -114,14 +116,13 @@ abstract class AccountBaseController extends FrontController
 		view()->share('countConversations', $this->conversations->count());
         
         // Companies
-		$this->conversations = Message::with('latestReply')
-			->whereHas('post', function($query) {
-				$query->currentCountry();
-			})
-			->byUserId(auth()->user()->id)
-			->where('parent_id', 0)
-			->orderByDesc('id');
-		view()->share('countMyCompanies', 1);
+        $this->companies = Company::all();
+			// ->byUserId(auth()->user()->id)
+            // ->orderByDesc('id');
+            
+        view()->share('companies', $this->companies);
+        
+		view()->share('countCompanies', $this->companies->count());
 		
 		// Payments
 		$this->transactions = Payment::whereHas('post', function($query) {

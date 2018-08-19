@@ -30,7 +30,7 @@
 							<a{!! ($pagePath=='my-companies') ? ' class="active"' : '' !!} href="{{ lurl('account/my-companies') }}">
 							<i class="icon-docs"></i> {{ t('My companies') }}&nbsp;
 							<span class="badge">
-								{{ isset($countMyCompanies) ? \App\Helpers\Number::short($countMyCompanies) : 0 }}
+								{{ isset($countCompanies) ? \App\Helpers\Number::short($countCompanies) : 0 }}
 							</span>
 							</a>
 						</li>

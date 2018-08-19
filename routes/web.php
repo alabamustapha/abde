@@ -237,15 +237,6 @@ Route::group([
 			// $router->pattern('slug', '.*');
 			$router->pattern('slug', '^(?=.*)((?!\/).)*$');
 			
-			Route::get('posts/create/{tmpToken?}', 'CreateController@getForm');
-			Route::post('posts/create', 'CreateController@postForm');
-			Route::put('posts/create/{tmpToken}', 'CreateController@postForm');
-			Route::get('posts/create/{tmpToken}/photos', 'PhotoController@getForm');
-			Route::post('posts/create/{tmpToken}/photos', 'PhotoController@postForm');
-			Route::post('posts/create/{tmpToken}/photos/{id}/delete', 'PhotoController@delete');
-			Route::get('posts/create/{tmpToken}/payment', 'PaymentController@getForm');
-			Route::post('posts/create/{tmpToken}/payment', 'PaymentController@postForm');
-			Route::get('posts/create/{tmpToken}/finish', 'CreateController@finish');
 			
 			// Payment Gateway Success & Cancel
 			Route::get('posts/create/{tmpToken}/payment/success', 'PaymentController@paymentConfirmation');
@@ -260,6 +251,16 @@ Route::group([
 			
 			Route::group(['middleware' => 'auth'], function ($router) {
 				$router->pattern('id', '[0-9]+');
+			
+				Route::get('posts/create/{tmpToken?}', 'CreateController@getForm');
+				Route::post('posts/create', 'CreateController@postForm');
+				Route::put('posts/create/{tmpToken}', 'CreateController@postForm');
+				Route::get('posts/create/{tmpToken}/photos', 'PhotoController@getForm');
+				Route::post('posts/create/{tmpToken}/photos', 'PhotoController@postForm');
+				Route::post('posts/create/{tmpToken}/photos/{id}/delete', 'PhotoController@delete');
+				Route::get('posts/create/{tmpToken}/payment', 'PaymentController@getForm');
+				Route::post('posts/create/{tmpToken}/payment', 'PaymentController@postForm');
+				Route::get('posts/create/{tmpToken}/finish', 'CreateController@finish');
 				
 				Route::get('posts/{id}/edit', 'EditController@getForm');
 				Route::put('posts/{id}/edit', 'EditController@postForm');
@@ -309,7 +310,12 @@ Route::group([
 			Route::get('account/{pagePath}/{id}/repost', 'PostsController@getArchivedPosts');
 			Route::get('account/{pagePath}/{id}/delete', 'PostsController@destroy');
 			Route::post('account/{pagePath}/delete', 'PostsController@destroy');
-			
+
+			Route::get('account/my-companies', 'CompaniesController@getPage');
+			Route::get('account/my-companies/create', 'CompaniesController@create');
+			Route::post('account/my-companies', 'CompaniesController@addCompany')->name('add_company');
+
+
 			// Conversations
 			Route::get('account/conversations', 'ConversationsController@index');
 			Route::get('account/conversations/{id}/delete', 'ConversationsController@destroy');

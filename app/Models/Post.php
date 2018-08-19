@@ -69,6 +69,7 @@ class Post extends BaseModel implements Feedable
 	protected $fillable = [
 		'country_code',
 		'user_id',
+		'company_id',
 		'category_id',
 		'post_type_id',
 		'title',

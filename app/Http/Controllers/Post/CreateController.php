@@ -16,26 +16,27 @@
 namespace App\Http\Controllers\Post;
 
 use App\Helpers\Ip;
-use App\Http\Controllers\Auth\Traits\VerificationTrait;
-use App\Http\Controllers\Post\Traits\CustomFieldTrait;
-use App\Http\Requests\PostRequest;
-use App\Models\Permission;
-use App\Models\Post;
-use App\Models\PostType;
-use App\Models\Category;
-use App\Models\Package;
 use App\Models\City;
-use App\Models\Scopes\VerifiedScope;
+use App\Models\Post;
 use App\Models\User;
-use App\Http\Controllers\FrontController;
-use App\Models\Scopes\ReviewedScope;
+use App\Models\Company;
+use App\Models\Package;
+use App\Models\Category;
+use App\Models\PostType;
+use App\Models\Permission;
 use App\Mail\PostNotification;
-use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\PostRequest;
+use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\FrontController;
 use Torann\LaravelMetaTags\Facades\MetaTag;
-use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
-use App\Helpers\Localization\Country as CountryLocalization;
 use App\Http\Controllers\Post\Traits\EditTrait;
+use App\Http\Controllers\Post\Traits\CustomFieldTrait;
+use App\Http\Controllers\Auth\Traits\VerificationTrait;
+use App\Helpers\Localization\Country as CountryLocalization;
+use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
 
 class CreateController extends FrontController
 {
@@ -98,6 +99,10 @@ class CreateController extends FrontController
 		// Count Packages
 		$data['countPackages'] = Package::trans()->applyCurrency()->count();
 		view()->share('countPackages', $data['countPackages']);
+		
+		// Companies
+		$data['companies'] = Company::all();
+		view()->share('companies', $data['companies']);
 		
 		// Count Payment Methods
 		$data['countPaymentMethods'] = $this->countPaymentMethods;

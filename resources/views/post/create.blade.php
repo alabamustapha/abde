@@ -36,6 +36,27 @@
 									{!! csrf_field() !!}
 									<fieldset>
 
+										<!-- company_id -->
+										<div class="form-group required <?php echo (isset($errors) and $errors->has('company_id')) ? 'has-error' : ''; ?>">
+											<label class="col-md-3 control-label">{{ t('Publisher') }} <sup>*</sup></label>
+											<div class="col-md-8">
+												<select name="company_id" id="companyId" class="form-control selecter">
+													<option value="0" data-type=""
+															@if (old('company_id')=='' or old('company_id')==0)
+																selected="selected"
+															@endif
+													> {{ t('Select a publisher') }} </option>
+													@foreach ($companies as $company)
+														<option value="{{ $company->id }}" data-type="{{ $company->name }}"
+																@if (old('company_id')==$company->id)
+																	selected="selected"
+																@endif
+														> {{ $company->name }} </option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+
 										<!-- parent_id -->
 										<div class="form-group required <?php echo (isset($errors) and $errors->has('parent_id')) ? 'has-error' : ''; ?>">
 											<label class="col-md-3 control-label">{{ t('Category') }} <sup>*</sup></label>
