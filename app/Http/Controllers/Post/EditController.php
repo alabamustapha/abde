@@ -15,17 +15,18 @@
 
 namespace App\Http\Controllers\Post;
 
-use App\Http\Controllers\Auth\Traits\VerificationTrait;
-use App\Http\Controllers\Post\Traits\CustomFieldTrait;
-use App\Http\Requests\PostRequest;
-use App\Models\PostType;
-use App\Models\Category;
+use App\Models\Company;
 use App\Models\Package;
+use App\Models\Category;
+use App\Models\PostType;
 use App\Models\PaymentMethod;
+use App\Http\Requests\PostRequest;
 use App\Http\Controllers\FrontController;
-use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
-use App\Helpers\Localization\Country as CountryLocalization;
 use App\Http\Controllers\Post\Traits\EditTrait;
+use App\Http\Controllers\Post\Traits\CustomFieldTrait;
+use App\Http\Controllers\Auth\Traits\VerificationTrait;
+use App\Helpers\Localization\Country as CountryLocalization;
+use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
 
 class EditController extends FrontController
 {
@@ -82,6 +83,9 @@ class EditController extends FrontController
         // Count Payment Methods
         $data['countPaymentMethods'] = $this->countPaymentMethods;
     
+        // Companies
+		$data['companies'] = Company::all();
+		// view()->share('companies', $data['companies']);
         // Save common's data
         $this->data = $data;
     }

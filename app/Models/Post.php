@@ -15,18 +15,19 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\FromActivatedCategoryScope;
-use App\Models\Scopes\LocalizedScope;
-use App\Models\Scopes\VerifiedScope;
-use App\Models\Scopes\ReviewedScope;
-use App\Models\Traits\CountryTrait;
-use App\Observer\PostObserver;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Request;
+use App\Models\Company;
 use Jenssegers\Date\Date;
-use Larapen\Admin\app\Models\Crud;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
+use App\Observer\PostObserver;
+use Larapen\Admin\app\Models\Crud;
+use App\Models\Traits\CountryTrait;
+use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
+use App\Models\Scopes\LocalizedScope;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Notifications\Notifiable;
+use App\Models\Scopes\FromActivatedCategoryScope;
 
 class Post extends BaseModel implements Feedable
 {
@@ -325,6 +326,11 @@ class Post extends BaseModel implements Feedable
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'user_id');
+	}
+	
+	public function company()
+	{
+		return $this->belongsTo(Company::class, 'company_id');
 	}
 	
 	/*

@@ -15,21 +15,22 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Http\Controllers\Auth\Traits\VerificationTrait;
-use App\Http\Requests\UserRequest;
-use App\Models\Scopes\VerifiedScope;
-use App\Models\UserType;
-use Creativeorange\Gravatar\Facades\Gravatar;
 use App\Models\Post;
-use App\Models\SavedPost;
+use App\Models\User;
 use App\Models\Gender;
+use App\Models\Company;
+use App\Models\UserType;
+use App\Models\SavedPost;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
+use App\Models\Scopes\VerifiedScope;
 use Illuminate\Support\Facades\Hash;
 use Torann\LaravelMetaTags\Facades\MetaTag;
-use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
+use Creativeorange\Gravatar\Facades\Gravatar;
+use App\Http\Controllers\Auth\Traits\VerificationTrait;
 use App\Helpers\Localization\Country as CountryLocalization;
-use App\Models\User;
+use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
 
 class EditController extends AccountBaseController
 {
@@ -53,6 +54,7 @@ class EditController extends AccountBaseController
 			->where('user_id', auth()->user()->id)
 			->groupBy('user_id')
 			->first();
+
 		$data['countPosts'] = Post::currentCountry()
 			->where('user_id', auth()->user()->id)
 			->count();
@@ -61,6 +63,7 @@ class EditController extends AccountBaseController
 		})->where('user_id', auth()->user()->id)
 			->count();
 		
+			
 		// Meta Tags
 		MetaTag::set('title', t('My account'));
 		MetaTag::set('description', t('My account on :app_name', ['app_name' => config('settings.app.app_name')]));

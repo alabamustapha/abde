@@ -555,6 +555,7 @@ return [
     'Preview' => 'Preview',
     'Done' => 'Done',
     'My companies' => 'My companies',
+    'Add new' => 'Add new',
     'Logo' => 'Logo',
     'Create a Company' => 'Create a Company',
     'The pictures have been updated' => 'The pictures have been updated',

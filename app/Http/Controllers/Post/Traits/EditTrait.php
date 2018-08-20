@@ -16,11 +16,12 @@
 namespace App\Http\Controllers\Post\Traits;
 
 use App\Helpers\Ip;
-use App\Http\Requests\PostRequest;
-use App\Models\Post;
 use App\Models\City;
-use App\Models\Scopes\VerifiedScope;
+use App\Models\Post;
+use App\Models\Company;
+use App\Http\Requests\PostRequest;
 use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
 use Torann\LaravelMetaTags\Facades\MetaTag;
 
 trait EditTrait
@@ -72,6 +73,10 @@ trait EditTrait
                 }
             }
         }
+
+        // Companies
+		$data['companies'] = Company::all();
+		view()->share('companies', $data['companies']);
         
         // Meta Tags
         MetaTag::set('title', t('Update My Ad'));

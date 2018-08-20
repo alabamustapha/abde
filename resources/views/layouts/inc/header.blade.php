@@ -121,6 +121,7 @@ if (getSegment(1) != trans('routes.countries')) {
 									</a>
 								</li>
 								<li><a href="{{ lurl('account/my-posts') }}"><i class="icon-th-thumb"></i> {{ t('My ads') }} </a></li>
+								<li><a href="{{ lurl('account/my-companies') }}"><i class="icon-th-thumb"></i> {{ t('My companies') }} </a></li>
 								<li><a href="{{ lurl('account/favourite') }}"><i class="icon-heart"></i> {{ t('Favourite ads') }} </a></li>
 								<li><a href="{{ lurl('account/saved-search') }}"><i class="icon-star-circled"></i> {{ t('Saved searches') }} </a></li>
 								<li><a href="{{ lurl('account/pending-approval') }}"><i class="icon-hourglass"></i> {{ t('Pending approval') }} </a></li>

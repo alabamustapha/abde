@@ -21,7 +21,7 @@
 
 			<div class="collapse-box">
 				<h5 class="collapse-title">
-					{{ t('My Companies') }}
+					{{ t('My companies') }}
 					<a href="#MyCompanies" data-toggle="collapse" class="pull-right"><i class="fa fa-angle-down"></i></a>
 				</h5>
 				<div class="panel-collapse collapse in" id="MyCompanies">

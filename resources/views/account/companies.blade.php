@@ -48,6 +48,15 @@
 							<h2 class="title-2"><i class="icon-docs"></i> {{ t('Create a Company') }} </h2>
 						@endif
 
+						<div class="row" style="margin-bottom: 10px;">
+							<div class="col-md-12">
+									<a class="btn btn-lg btn-default" href="{{ lurl('account/my-companies/create') }}">
+										<i class="fa fa-plus"></i> {{ t('Add new') }}
+									</a>
+							</div>	
+						</div>
+
+
 						<div class="table-responsive">
 							<form name="listForm" method="POST" action="{{ lurl('account/'.$pagePath.'/delete') }}">
 								{!! csrf_field() !!}
