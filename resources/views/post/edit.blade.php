@@ -104,7 +104,7 @@ if ($post->category) {
 												@foreach ($postTypes as $postType)
 													<label class="radio-inline" for="post_type_id-{{ $postType->id }}">
 														<input name="post_type_id" id="postTypeId-{{ $postType->tid }}" value="{{ $postType->tid }}"
-															   type="radio" {{ (old('post_type_id', $post->post_type_id)==$postType->tid) ? 'checked="checked"' : '' }}>
+															   type="radio" {{ (old('post_type_id', $post->post_type_id)==$postType->tid) ? 'checked' : '' }}>
 														{{ $postType->name }}
 													</label>
 												@endforeach
@@ -136,6 +136,8 @@ if ($post->category) {
 										<div id="customFields"></div>
 
 										<!-- price -->
+										<input id="price" name="price" type="hidden" value="{{ old('price', $post->price) }}">
+										<!--
 										<div id="priceBloc" class="form-group required <?php echo (isset($errors) and $errors->has('price')) ? 'has-error' : ''; ?>">
 											<label class="col-md-3 control-label" for="price">{{ t('Price') }}</label>
 											<div class="col-md-8">
@@ -152,7 +154,7 @@ if ($post->category) {
 												</div>
 											</div>
 										</div>
-										
+										-->
 										<!-- country_code -->
 										<input id="countryCode" name="country_code" type="hidden" value="{{ !empty($post->country_code) ? $post->country_code : config('country.code') }}">
 									
@@ -191,14 +193,17 @@ if ($post->category) {
 											</div>
 										</div>
 
-
+										<!--
 										<div class="content-subheading">
 											<i class="icon-user fa"></i>
 											<strong>{{ t('Seller information') }}</strong>
 										</div>
+										-->
 										
 										
 										<!-- contact_name -->
+										<input type="hidden" name="contact_name" value="{{ "name" }}">
+										<!--
 										<div class="form-group required <?php echo (isset($errors) and $errors->has('contact_name')) ? 'has-error' : ''; ?>">
 											<label class="col-md-3 control-label" for="contact_name">{{ t('Your name') }} <sup>*</sup></label>
 											<div class="col-md-8">
@@ -207,8 +212,11 @@ if ($post->category) {
 													   value="{{ old('contact_name', $post->contact_name) }}">
 											</div>
 										</div>
+										-->
 
 										<!-- email -->
+										<input id="email" name="email" type="hidden" value="{{ old('email', $post->email) }}">
+										<!--
 										<div class="form-group required <?php echo (isset($errors) and $errors->has('email')) ? 'has-error' : ''; ?>">
 											<label class="col-md-3 control-label" for="email"> {{ t('Email') }} </label>
 											<div class="col-md-8">
@@ -220,8 +228,12 @@ if ($post->category) {
 												</div>
 											</div>
 										</div>
-
+										-->
+										
 										<!-- phone -->
+										
+										<input id="phone" name="phone" type="hidden" value="{{ phoneFormat(old('phone', $post->phone), $post->country_code) }}">
+										<!--
 										<div class="form-group required <?php echo (isset($errors) and $errors->has('phone')) ? 'has-error' : ''; ?>">
 											<label class="col-md-3 control-label" for="phone">{{ t('Phone Number') }}</label>
 											<div class="col-md-8">
@@ -241,7 +253,8 @@ if ($post->category) {
 												</div>
 											</div>
 										</div>
-
+										-->
+										
 										<!-- Button  -->
 										<div class="form-group">
 											<div class="col-md-12" style="text-align: center;">
@@ -386,5 +399,6 @@ if ($post->category) {
 	</script>
 
 	<script src="{{ url('assets/js/app/d.select.category.js') . vTime() }}"></script>
+	<script src="{{ url('assets/js/app/d.select.post_type.js') . vTime() }}"></script>
 	<script src="{{ url('assets/js/app/d.select.location.js') . vTime() }}"></script>
 @endsection

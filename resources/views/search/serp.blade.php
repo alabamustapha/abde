@@ -118,7 +118,7 @@
 															{{ t('Sort by') }}
 														</a>
 													</li>
-													<li>
+													<!--<li>
 														<a href="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceAsc'])) !!}" rel="nofollow">
 															{{ t('Price : Low to High') }}
 														</a>
@@ -127,7 +127,7 @@
 														<a href="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceDesc'])) !!}" rel="nofollow">
 															{{ t('Price : High to Low') }}
 														</a>
-													</li>
+													</li> -->
 													<li>
 														<a href="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'relevance'])) !!}" rel="nofollow">
 															{{ t('Relevance') }}

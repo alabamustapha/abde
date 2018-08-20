@@ -175,7 +175,7 @@ if (!auth()->check()) {
 							@endif
 						</div>
 						-->
-						<!--ads-image-->
+						
 						
 						
 						@if (config('plugins.reviews.installed'))
@@ -255,6 +255,33 @@ if (!auth()->check()) {
 											<!-- Custom Fields -->
 											@include('post.inc.fields-values')
 										
+
+											<!--ads-image-->
+											<div class="row">
+												<div class="col-md-12"  style="margin-top: 10px;">
+														
+												
+													@if (count($post->pictures) > 0)
+														
+														
+														<ul class="ads-image-list">
+															@foreach($post->pictures as $key => $image)
+																<li>
+																	<a class="thumb-item-link" data-slide-index="{{ $key }}" href="">
+																		<img src="{{ resize($image->filename, 'small') }}" alt="img">
+																	</a>
+																</li>
+															@endforeach
+														</ul>
+														
+													@endif
+															
+															
+												</div>
+												
+											</div>
+											
+											<!--ads-image-->
 											<!-- Tags -->
 											@if (!empty($post->tags))
 												<?php $tags = explode(',', $post->tags); ?>
@@ -403,7 +430,7 @@ if (!auth()->check()) {
 												}	
 											?>
 											
-											<img class="flag-icon" src="{{ $postUserImg }}" style="text-align: center;" width="50">
+											<img class="flag-icon" src="{{ $postUserImg }}" style="text-align: center;" width="80">
 										</div>
 										
 										@if (isset($post->contact_name) and $post->contact_name != '')

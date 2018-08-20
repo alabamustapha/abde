@@ -37,9 +37,9 @@ $(document).ready(function() {
 		});
 	}
 	
+	postType = $('[id^=postTypeId-]:checked').val();
+	
 	/* On load */
-	
-	
 	getCustomFieldsByPostType(siteUrl, languageCode, postType);
 	
 	/* On category selected */
@@ -102,7 +102,7 @@ function getCustomFieldsByPostType(siteUrl, languageCode, postTypeId) {
 	}).done(function(obj) {
 		/* Load Custom Fields */
 		$('#customFields').html(obj.customFields);
-		alert('done');
+		
 		console.log(obj.customFields);
 		/* Apply Fields Components */
 		initSelect2($('#customFields'), languageCode);

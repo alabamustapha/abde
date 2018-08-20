@@ -125,7 +125,7 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 						
 						<div class="col-sm-2 no-padding photobox">
 							<div class="add-image">
-								<span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span>
+								<!-- <span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span> -->
 								<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
 								<a href="{{ lurl($post->uri, $attr) }}">
 									<img class="thumbnail no-margin" src="{{ $postUserImg }}" alt="img">

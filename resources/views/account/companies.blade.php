@@ -45,7 +45,7 @@
 						@elseif ($pagePath=='pending-approval')
 							<h2 class="title-2"><i class="icon-hourglass"></i> {{ t('Pending approval') }} </h2>
 						@else
-							<h2 class="title-2"><i class="icon-docs"></i> {{ t('Posts') }} </h2>
+							<h2 class="title-2"><i class="icon-docs"></i> {{ t('Create a Company') }} </h2>
 						@endif
 
 						<div class="table-responsive">
@@ -131,6 +131,9 @@
 											<div>
 												
 												<p>
+                                                    <a class="btn btn-primary btn-sm edit-action" href="{{ lurl('account/my-companies/'.$company->id.'/edit') }}">
+                                                        <i class="fa fa-trash"></i> {{ t('Edit') }}
+                                                    </a>
                                                     <a class="btn btn-danger btn-sm delete-action" href="{{ lurl('account/my-companies/'.$company->id.'/delete') }}">
                                                         <i class="fa fa-trash"></i> {{ t('Delete') }}
                                                     </a>
