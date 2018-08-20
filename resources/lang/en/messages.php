@@ -8,6 +8,7 @@ return [
 	'first_name' => 'First name',
 	'last_name' => 'Last name',
     'name' => 'Name',
+    'names' => 'Names',
     'purchase_code' => 'Purchase code',
 	'action' => 'Action',
 	'site_info' => 'Site info',

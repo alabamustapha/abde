@@ -60,7 +60,7 @@ class PostType extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['name', 'active', 'translation_lang', 'translation_of'];
+    protected $fillable = ['name', 'active', 'translation_lang', 'translation_of', 'is_pro'];
     public $translatable = ['name'];
     
     /**

@@ -49,9 +49,16 @@ class PostTypeController extends PanelController
 			'label' => "ID",
 
 		]);
+		
 		$this->xPanel->addColumn([
 			'name'  => "name",
 			'label' => trans("admin::messages.Name"),
+		]);
+
+		$this->xPanel->addColumn([
+			'name'  => "is_pro",
+			'label' => "is_pro",
+
 		]);
 		
 		// FIELDS
@@ -62,6 +69,12 @@ class PostTypeController extends PanelController
 			'attributes' => [
 				'placeholder' => trans("admin::messages.Name"),
 			],
+		]);
+		
+		$this->xPanel->addField([
+			'name'       => "is_pro",
+			'label'      => trans("admin::messages.Is_pro"),
+			'type'       => "checkbox",
 		]);
 	}
 	

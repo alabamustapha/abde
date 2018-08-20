@@ -41,11 +41,16 @@
 											<label class="col-md-3 control-label">{{ t('Publisher') }} <sup>*</sup></label>
 											<div class="col-md-8">
 												<select name="company_id" id="companyId" class="form-control selecter">
+													{{-- <option value="0" data-type=""
+															@if (old('company_id')=='' or old('company_id')==0)
+																selected="selected"
+															@endif
+													> {{ t('Select a publisher') }} </option> --}}
 													<option value="0" data-type=""
 															@if (old('company_id')=='' or old('company_id')==0)
 																selected="selected"
 															@endif
-													> {{ t('Select a publisher') }} </option>
+													> {{ auth()->user()->name }} </option>
 													@foreach ($companies as $company)
 														<option value="{{ $company->id }}" data-type="{{ $company->name }}"
 																@if (old('company_id')==$company->id)
@@ -98,7 +103,7 @@
 											<label class="col-md-3 control-label">{{ t('Type') }} <sup>*</sup></label>
 											<div class="col-md-8">
 												@foreach ($postTypes as $postType)
-													<label class="radio-inline" for="post_type_id-{{ $postType->tid }}">
+												<label class="radio-inline post_type {{ $postType->is_pro ? 'is_pro' : 'not_pro' }}" for="post_type_id-{{ $postType->tid }}">
 														<input name="post_type_id" id="postTypeId-{{ $postType->tid }}" value="{{ $postType->tid }}"
 															   type="radio" {{ (old('post_type_id')==$postType->tid) ? 'checked="checked"' : '' }}>
 														{{ $postType->name }}
@@ -372,6 +377,29 @@
 		<script src="{{ url('assets/plugins/forms/validation/localization/messages_'.config('app.locale').'.min.js') }}" type="text/javascript"></script>
 	@endif
 	
+	<script>
+
+		$(document).ready(function(){
+			if($("#companyId").val() == 0){	
+				$("label.post_type.is_pro").hide();
+				$("label.post_type.not_pro").show();	
+			}else{
+				$("label.post_type.is_pro").show();
+				$("label.post_type.not_pro").hide();	
+			}
+		})
+		$("#companyId").change(function(e){
+			
+			if($(this).val() == 0){	
+				$("label.post_type.is_pro").hide();
+				$("label.post_type.not_pro").show();	
+			}else{
+				$("label.post_type.is_pro").show();
+				$("label.post_type.not_pro").hide();	
+			}
+			
+		})
+	</script>
 	<script>
 		/* Translation */
 		var lang = {

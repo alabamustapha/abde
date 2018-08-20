@@ -376,6 +376,7 @@ return [
     'Reviewed' => 'Reviewed',
     'Archived' => 'Archived',
     'Name' => 'Name',
+    'Is_pro' => 'Is pro',
     'Provider Name' => 'Provider Name',
     'Type' => 'Type',
     'Entry' => 'Entry',
