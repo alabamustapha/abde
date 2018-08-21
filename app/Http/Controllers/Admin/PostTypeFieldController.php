@@ -76,7 +76,7 @@ class PostTypeFieldController extends PanelController
 			}
 			$this->xPanel->setParentKeyField('post_type_id');
 			$this->xPanel->addClause('where', 'post_type_id', '=', $post_type->id);
-			$this->xPanel->setParentRoute(admin_uri('post_types'));
+			$this->xPanel->setParentRoute(admin_uri('p_types'));
 			$this->xPanel->setParentEntityNameStrings(trans('admin::messages.post_type'), trans('admin::messages.post_types'));
 			$this->xPanel->allowAccess(['reorder', 'parent']);
 		}
