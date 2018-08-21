@@ -24,6 +24,7 @@ use App\Models\Company;
 use App\Models\Scopes\VerifiedScope;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
+use App\Http\Requests\AddCompanyRequest;
 use Illuminate\Http\Request as HttpRequest;
 use Torann\LaravelMetaTags\Facades\MetaTag;
 use App\Http\Controllers\Search\Traits\PreSearchTrait;
@@ -88,14 +89,15 @@ class CompaniesController extends AccountBaseController
 
     }
 
-    public function update(HttpRequest $request, Company $company){
+    public function update(AddCompanyRequest $request, Company $company){
+        
         $name =  $request->name;
+        
         $description =  $request->description;
 
         $company->name = $name;
-        $company->description = $description;
 
-        
+        $company->description = $description;
 
         if($request->hasFile('logo') && $request->logo->isValid()){
            
@@ -111,7 +113,7 @@ class CompaniesController extends AccountBaseController
         return back();
     }
 
-    public function addCompany(HttpRequest $request){
+    public function addCompany(AddCompanyRequest $request){
         
         $path = '';
         
