@@ -58,9 +58,9 @@
 
 
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl('account/'.$pagePath.'/delete') }}">
+							{{-- <form name="listForm" method="POST" action="{{ lurl('account/'.$pagePath.'/delete') }}"> --}}
 								{!! csrf_field() !!}
-								<div class="table-action">
+								{{-- <div class="table-action">
 									<label for="checkAll">
 										<input type="checkbox" id="checkAll">
 										{{ t('Select') }}: {{ t('All') }} |
@@ -77,7 +77,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> --}}
 								
 								<table id="addManageTable" class="table table-striped table-bordered add-manage-table table demo" data-filter="#filter" data-filter-text-only="true">
 									<thead>
@@ -92,69 +92,74 @@
 									</thead>
 									<tbody>
 
-									<?php
-									if (isset($companies) && $companies->count() > 0):
-									foreach($companies as $key => $company):
-										                                    	
-                                    ?>
-                                    
-									<tr>
-										<td style="width:2%" class="add-img-selector">
-											<div class="checkbox">
-												<label><input type="checkbox" name="entries[]" value="{{ $company->id }}"></label>
-											</div>
-										</td>
-										<td style="width:14%" class="add-img-td">
-											<a href="{{ lurl('account/my-companies/'.$company->id.'/edit') }}"><img class="thumbnail img-responsive" src="{{ asset('storage/' . $company->logo) }}" alt="img"></a>
-										</td>
-                                        
-                                        <td style="width:25%" class="ads-details-td">
-											<div>
-												<p>
-													<strong>
-                                                        <a href="{{ lurl('account/my-companies/'.$company->id.'/edit') }}" title="{{ $company->name }}">{{ str_limit($company->name, 40) }}</a>
-                                                    </strong>
-													
-                                                </p>
-															
-											</div>
-                                        </td>
-                                        
-                                        <td style="width:58%" class="ads-details-td">
-											<div>
-												<p>
-													{{ $company->description }}
-                                                </p>
-															
-											</div>
-										</td>
+									
+									@if(isset($companies) && $companies->count() > 0)
 										
-										<td style="width:16%" class="price-td">
-											<div>
-												<strong>
-                                                    {{ $company->posts->count() }}
-												</strong>
-											</div>
-										</td>
-										<td style="width:10%" class="action-td">
-											<div>
-												
-												<p>
-                                                    <a class="btn btn-primary btn-sm edit-action" href="{{ lurl('account/my-companies/'.$company->id.'/edit') }}">
-                                                        <i class="fa fa-trash"></i> {{ t('Edit') }}
-                                                    </a>
-                                                    <a class="btn btn-danger btn-sm delete-action" href="{{ lurl('account/my-companies/'.$company->id.'/delete') }}">
-                                                        <i class="fa fa-trash"></i> {{ t('Delete') }}
-                                                    </a>
-                                                </p>
-											</div>
-										</td>
-									</tr>
-									<?php endforeach; ?>
-                                    <?php endif; ?>
-									</tbody>
+											@foreach($companies as $key => $company)
+																					
+										
+												<tr>
+													<td style="width:2%" class="add-img-selector">
+														<div class="checkbox">
+															<label><input type="checkbox" name="entries[]" value="{{ $company->id }}"></label>
+														</div>
+													</td>
+													<td style="width:14%" class="add-img-td">
+														<a href="{{ lurl('account/my-companies/'.$company->id.'/edit') }}"><img class="thumbnail img-responsive" src="{{ asset('storage/' . $company->logo) }}" alt="img"></a>
+													</td>
+													
+													<td style="width:25%" class="ads-details-td">
+														<div>
+															<p>
+																<strong>
+																	<a href="{{ lurl('account/my-companies/'.$company->id.'/edit') }}" title="{{ $company->name }}">{{ str_limit($company->name, 40) }}</a>
+																</strong>
+																
+															</p>
+																		
+														</div>
+													</td>
+													
+													<td style="width:58%" class="ads-details-td">
+														<div>
+															<p>
+																{{ $company->description }}
+															</p>
+																		
+														</div>
+													</td>
+													
+													<td style="width:16%" class="price-td">
+														<div>
+															<strong>
+																{{ $company->posts->count() }}
+															</strong>
+														</div>
+													</td>
+													<td style="width:10%" class="action-td">
+														<div>
+															
+																<a class="btn btn-primary btn-sm edit-action" href="{{ lurl('account/my-companies/'.$company->id.'/edit') }}">
+																	<i class="fa fa-trash"></i> {{ t('Edit') }}
+																</a>
+																<form action="{{ lurl('account/my-companies/'.$company->id) }}" id="company-{{ $company->id }}" method="POST">
+																	{{ csrf_field() }}	
+																	{{ method_field('DELETE') }}	
+																	<button class="btn btn-danger btn-sm delete-company-action" data-company-id="{{ $company->id }}">
+																		<i class="fa fa-trash"></i> {{ t('Delete') }}
+																	</button>
+																</form>
+															
+														</div>
+													</td>
+												</tr>
+
+											@endforeach
+                                    @endif
+									
+								</tbody>
 								</table>
-							</form>
+							{{-- </form> --}}
 						</div>
                             
                         <div class="pagination-bar text-center">
@@ -191,19 +196,35 @@
 				checkAll(this);
 			});
 			
-			$('a.delete-action, button.delete-action').click(function(e)
+			// $('a.delete-action, button.delete-action').click(function(e)
+			// {
+			// 	e.preventDefault(); /* prevents the submit or reload */
+			// 	var confirmation = confirm("{{ t('Are you sure you want to perform this action?') }}");
+				
+			// 	if (confirmation) {
+			// 		if( $(this).is('a') ){
+			// 			var url = $(this).attr('href');
+			// 			if (url !== 'undefined') {
+			// 				redirect(url);
+			// 			}
+			// 		} else {
+			// 			$('form#company-' + $(this).data('companyId')).submit();
+			// 			// $('form[name=listForm]').submit();
+			// 		}
+					
+			// 	}
+				
+			// 	return false;
+			// });
+			
+			$('button.delete-company-action').click(function(e)
 			{
 				e.preventDefault(); /* prevents the submit or reload */
 				var confirmation = confirm("{{ t('Are you sure you want to perform this action?') }}");
 				
 				if (confirmation) {
-					if( $(this).is('a') ){
-						var url = $(this).attr('href');
-						if (url !== 'undefined') {
-							redirect(url);
-						}
-					} else {
-						$('form[name=listForm]').submit();
+					alert("here");
+						// $('form#company-' + $(this).data('companyId')).submit();
 					}
 					
 				}

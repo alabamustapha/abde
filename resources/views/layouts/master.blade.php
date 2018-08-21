@@ -109,7 +109,7 @@
 			display: inline-block;
 		}
 	</style>
- 
+	
 	<script>
 		paceOptions = {
 			elements: true

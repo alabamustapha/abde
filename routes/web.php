@@ -313,6 +313,9 @@ Route::group([
 
 			Route::get('account/my-companies', 'CompaniesController@getPage');
 			Route::get('account/my-companies/create', 'CompaniesController@create');
+			Route::put('account/my-companies/{company}', 'CompaniesController@update')->name('update_company');
+			Route::get('account/my-companies/{company}/edit', 'CompaniesController@edit');
+			Route::delete('account/my-companies/{company}', 'CompaniesController@destroy')->name('delete_company');
 			Route::post('account/my-companies', 'CompaniesController@addCompany')->name('add_company');
 
 

@@ -13,6 +13,11 @@
 --}}
 @extends('layouts.master')
 
+@section('after_styles')
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+
+@endsection
 <?php
 // Phone
 $phone = TextToImage::make($post->phone, IMAGETYPE_PNG, ['backgroundColor' => 'rgba(0,0,0,0.0)', 'color' => '#FFFFFF']);
@@ -174,7 +179,7 @@ if (!auth()->check()) {
 								</div>
 							@endif
 						</div>
-						-->
+					-->
 						
 						
 						
@@ -260,22 +265,26 @@ if (!auth()->check()) {
 											<div class="row">
 												<div class="col-md-12"  style="margin-top: 10px;">
 														
-												
-													@if (count($post->pictures) > 0)
-														
+													{{-- <div class="gallery"> --}}
+													
+														@if (count($post->pictures) > 0)
 														
 														<ul class="ads-image-list">
 															@foreach($post->pictures as $key => $image)
 																<li>
-																	<a class="thumb-item-link" data-slide-index="{{ $key }}" href="">
-																		<img src="{{ resize($image->filename, 'small') }}" alt="img">
+																	<a href="{{ resize($image->filename, 'large') }}" data-caption="Image caption">
+																		<img src="{{ resize($image->filename, 'small') }}" alt="First image">
 																	</a>
+																	
+																	{{-- <a class="thumb-item-link" data-slide-index="{{ $key }}" href="">
+																		<img src="{{ resize($image->filename, 'small') }}" alt="img">
+																	</a> --}}
 																</li>
 															@endforeach
 														</ul>
 														
 													@endif
-															
+												{{-- </div>		 --}}
 															
 												</div>
 												
@@ -582,7 +591,13 @@ if (!auth()->check()) {
 
 	<!-- bxSlider Javascript file -->
 	<script src="{{ url('assets/plugins/bxslider/jquery.bxslider.min.js') }}"></script>
-    
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+
+	<script>
+		baguetteBox.run('.ads-image-list', { animation: 'slideIn'});
+	</script>
+
 	<script>
 		/* Favorites Translation */
         var lang = {
