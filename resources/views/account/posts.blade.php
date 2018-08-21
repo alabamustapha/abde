@@ -76,7 +76,7 @@
 										<th data-type="numeric" data-sort-initial="true"></th>
 										<th>{{ t('Photo') }}</th>
 										<th data-sort-ignore="true">{{ t('Ads Details') }}</th>
-										<th data-type="numeric">--</th>
+										<!--<th data-type="numeric">--</th> -->
 										<th>{{ t('Option') }}</th>
 									</tr>
 									</thead>
@@ -164,7 +164,7 @@
 												</p>
 											</div>
 										</td>
-										<td style="width:16%" class="price-td">
+										{{-- <td style="width:16%" class="price-td">
 											<div>
 												<strong>
 													@if ($post->price > 0)
@@ -174,7 +174,7 @@
 													@endif
 												</strong>
 											</div>
-										</td>
+										</td> --}}
 										<td style="width:10%" class="action-td">
 											<div>
 												@if ($post->user_id==$user->id and $post->archived==0)

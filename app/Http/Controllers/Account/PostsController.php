@@ -251,7 +251,7 @@ class PostsController extends AccountBaseController
 						try {
 							Mail::send(new PostDeleted($tmpPost));
 						} catch (\Exception $e) {
-							flash($e->getMessage())->error();
+							// flash($e->getMessage())->error();
 						}
 					}
                 }
