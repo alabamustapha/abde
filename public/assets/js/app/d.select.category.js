@@ -213,9 +213,9 @@ function applyCategoryTypeActions(categoryType, packageIsEnabled) {
 	} else if (categoryType == 'non-salable') {
 		$('#priceBloc').hide();
 		
-		$('#postTypeBloc label[for="post_type_id-2"]').show();
+		// $('#postTypeBloc label[for="post_type_id-2"]').show();
 	} else {
-		$('#postTypeBloc label[for="post_type_id-2"]').show();
+		// $('#postTypeBloc label[for="post_type_id-2"]').show();
 		$('#priceBloc label[for="price"]').html(lang.price);
 		$('#priceBloc').show();
 	}

@@ -380,25 +380,27 @@
 	<script>
 
 		$(document).ready(function(){
-			if($("#companyId").val() == 0){	
+			if($("select#companyId").val() == 0){	
 				$("label.post_type.is_pro").hide();
 				$("label.post_type.not_pro").show();	
-			}else{
+			}else if($("select#companyId").val() > 0){
 				$("label.post_type.is_pro").show();
 				$("label.post_type.not_pro").hide();	
 			}
-		})
-		$("#companyId").change(function(e){
+
+			$("select#companyId").change(function(e){
 			
-			if($(this).val() == 0){	
-				$("label.post_type.is_pro").hide();
-				$("label.post_type.not_pro").show();	
-			}else{
-				$("label.post_type.is_pro").show();
-				$("label.post_type.not_pro").hide();	
-			}
-			
+				if($(this).val() == 0){	
+					$("label.post_type.is_pro").hide();
+					$("label.post_type.not_pro").show();	
+				}else if($("#companyId").val() > 0){
+					$("label.post_type.is_pro").show();
+					$("label.post_type.not_pro").hide();	
+				}
+				
+			})
 		})
+		
 	</script>
 	<script>
 		/* Translation */
