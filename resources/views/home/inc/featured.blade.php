@@ -37,6 +37,28 @@ if (!isset($cacheExpiration)) {
 								} else {
 									$postImg = resize(config('larapen.core.picture.default'));
 								}
+
+								$postUserImg = '';
+		
+								$p_company = \App\Models\Company::where('id', $post->company_id)->first();
+								
+								if($post->company_id && !is_null($p_company->logo)){
+
+									$postUserImg = asset('storage/' . $p_company->logo);
+
+								} else {
+
+									$p_user = \App\Models\User::where('id', $post->user_id)->first();
+
+									if(!empty($p_user->gravatar)){
+										$postUserImg = $p_user->gravatar;
+									}else{
+										$postUserImg = url('images/user.jpg');
+
+									}
+											
+
+								}
 			
 								// Category
 								$cacheId = 'category.' . $post->category_id . '.' . config('app.locale');
@@ -61,7 +83,7 @@ if (!isset($cacheExpiration)) {
 									<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
 									<a href="{{ lurl($post->uri, $attr) }}">
 										<span class="item-carousel-thumb">
-											<img class="img-responsive" src="{{ $postImg }}" alt="{{ $post->title }}" style="border: 1px solid #e7e7e7; margin-top: 2px;">
+											<img class="img-responsive" src="{{ $postUserImg }}" alt="{{ $post->title }}" style="border: 1px solid #e7e7e7; margin-top: 2px;">
 										</span>
 										<span class="item-name">{{ str_limit($post->title, 35, '...') }}</span>
 										
