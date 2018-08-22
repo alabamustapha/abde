@@ -446,7 +446,7 @@ if (!auth()->check()) {
 											@if (isset($post->user) and !empty($post->user))
 												<h3 class="no-margin">
 													<?php $attr = ['countryCode' => config('country.icode'), 'id' => $post->user->id]; ?>
-													<a href="{{ lurl(trans('routes.v-search-user', $attr), $attr) }}">
+													<a href="{{ lurl(trans('routes.v-search-user', $attr), $attr) . '?cid=' . $post->company_id }}">
 														{{ $post->company_id ? $post->company->name : $post->user->name }}
 													</a>
 												</h3>
