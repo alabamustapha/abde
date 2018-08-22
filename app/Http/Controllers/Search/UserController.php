@@ -78,9 +78,19 @@ class UserController extends BaseController
 	 */
     private function searchByUserId($userId, $username = null)
     {
+        
         // Search
+        if(\Request::has('cid')){
+            $cid = \Request::get('cid');
+        }else{
+            $cid = 0;
+        }
+
+        // dd($cid);
+
         $search = new Search();
-        $data = $search->setUser($userId)->setRequestFilters()->fetch();
+        $data = $search->setUser($userId, $cid)->setRequestFilters()->fetch();
+
 
         // Get Titles
         $bcTab = $this->getBreadcrumb();

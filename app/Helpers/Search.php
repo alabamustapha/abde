@@ -506,14 +506,18 @@ class Search
      * @param $userId
      * @return $this
      */
-    public function setUser($userId)
+    public function setUser($userId, $companyId)
     {
         if (trim($userId) == '') {
             return $this;
         }
+        
+        $this->arrSql->where['a.company_id'] = ' = :companyId';
         $this->arrSql->where['a.user_id'] = ' = :userId';
         $this->bindings['userId'] = $userId;
+        $this->bindings['companyId'] = $companyId;
 
+        
         return $this;
     }
 	
