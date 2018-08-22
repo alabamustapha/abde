@@ -63,7 +63,7 @@ if (!isset($cacheExpiration)) {
 										<span class="item-carousel-thumb">
 											<img class="img-responsive" src="{{ $postImg }}" alt="{{ $post->title }}" style="border: 1px solid #e7e7e7; margin-top: 2px;">
 										</span>
-										<span class="item-name">{{ str_limit($post->title, 70) }}</span>
+										<span class="item-name">{{ str_limit($post->title, 35, '...') }}</span>
 										
 										{{-- @if (config('plugins.reviews.installed'))
 											@if (view()->exists('reviews::ratings-list'))

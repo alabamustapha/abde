@@ -113,7 +113,32 @@
                                             $postImg = resize($post->pictures->get(0)->filename, 'medium');
                                         } else {
                                             $postImg = resize(config('larapen.core.picture.default'));
-                                        }
+										}
+										
+										
+												
+												$postUserImg = '';
+		
+												$p_company = \App\Models\Company::where('id', $post->company_id)->first();
+												
+												if($post->company_id && !is_null($p_company->logo)){
+
+													$postUserImg = asset('storage/' . $p_company->logo);
+
+												} else {
+
+													$p_user = \App\Models\User::where('id', $post->user_id)->first();
+
+													if(!empty($p_user->gravatar)){
+														$postUserImg = $p_user->gravatar;
+													}else{
+														$postUserImg = url('images/user.jpg');
+
+													}
+															
+
+												}	
+									
 
                                     	// Get country flag
                                     	$countryFlagPath = 'images/flags/16/' . strtolower($post->country_code) . '.png';
@@ -125,7 +150,7 @@
 											</div>
 										</td>
 										<td style="width:14%" class="add-img-td">
-											<a href="{{ $postUrl }}"><img class="thumbnail img-responsive" src="{{ $postImg }}" alt="img"></a>
+											<a href="{{ $postUrl }}"><img class="thumbnail img-responsive" src="{{ $postUserImg }}" alt="img"></a>
 										</td>
 										<td style="width:58%" class="ads-details-td">
 											<div>
