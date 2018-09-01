@@ -18,6 +18,7 @@ if ($subCats->has(0)) {
 		(isset($cats) and !empty($cats))
 	):
 ?>
+<!--
 @if (isset($subCats) and !empty($subCats) and isset($cat) and !empty($cat))
 	@if ($subCats->has($cat->tid))
 		<div class="container">
@@ -53,4 +54,5 @@ if ($subCats->has(0)) {
 		</div>
 	@endif
 @endif
+	-->
 <?php endif; ?>

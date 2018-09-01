@@ -50,6 +50,21 @@ class HomeController extends FrontController
 	{
 		$data = [];
 		$countryCode = config('country.code');
+
+		// Get Categories
+        $cacheId = 'categories.all.' . config('app.locale');
+        $cats = Cache::remember($cacheId, $this->cacheExpiration, function () {
+            $cats = Category::trans()->orderBy('lft')->get();
+            return $cats;
+        });
+        $cats = collect($cats)->keyBy('translation_of');
+        $cats = $subCats = $cats->groupBy('parent_id');
+        
+        $col = round($cats->get(0)->count() / 3, 0, PHP_ROUND_HALF_EVEN);
+        $col = ($col > 0) ? $col : 1;
+        $data['cats'] = $cats->get(0)->chunk($col);
+        $data['subCats'] = $subCats->forget(0);
+        
 		
 		// Get all homepage sections
 		$cacheId = $countryCode . '.homeSections';

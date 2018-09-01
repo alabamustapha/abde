@@ -117,7 +117,7 @@ class AppServiceProvider extends ServiceProvider
 			$message = ($e->getMessage() != '') ? $e->getMessage() : 'symlink() has been disabled on your server';
 			$message = $message . ' - Please <a href="' . $errorUrl . '" target="_blank">see this article</a> for more information.';
 			
-			flash($message)->error();
+			// flash($message)->error();
 		}
 	}
 	

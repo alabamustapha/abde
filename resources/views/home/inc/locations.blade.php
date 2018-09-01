@@ -73,7 +73,7 @@ if (isset($citiesOptions)) {
 					}
 				}
 				?>
-				@if ($loc['show'])
+				
 				<div class="{{ $leftClassCol }} page-content no-margin no-padding">
 					@if (isset($cities))
 						<div class="relative location-content" style="text-align: center;">
@@ -82,47 +82,80 @@ if (isset($citiesOptions)) {
 									<div>
 										@if ($loc['show'] && $map['show'])
 											<h2 class="title-3" style="white-space: nowrap;">
-												<i class="icon-location-2"></i>&nbsp;{{ t('Choose a city or region') }}
+													<span class="title-3" style="font-weight: light;">{{ t('Browse by') }} <span style="font-weight: bold;">{{ t('Category') }}</span></span>
 											</h2>
 										@endif
 										<div class="row" style="padding: 0 10px 0 20px;">
-											@foreach ($cities as $key => $items)
-												<ul class="cat-list {{ $ulCol }} {{ (count($cities) == $key+1) ? 'cat-list-border' : '' }}">
-													@foreach ($items as $k => $city)
-														<li>
-															@if ($city->id == 999999999)
-																<a href="#browseAdminCities" id="dropdownMenu1" data-toggle="modal">{!! $city->name !!}</a>
-															@else
-																<?php $attr = ['countryCode' => config('country.icode'), 'city' => slugify($city->name), 'id' => $city->id]; ?>
-																<a href="{{ lurl(trans('routes.v-search-city', $attr), $attr) }}">
-																	{{ $city->name }}
-																</a>
-															@endif
-														</li>
-													@endforeach
-												</ul>
-											@endforeach
-										</div>
-									</div>
+                                            
+                                            
+
+                                            
+{{-- @if (isset($categoriesOptions) and isset($categoriesOptions['type_of_display'])) --}}
+    
+<div class="list-categories-children styled">
+        @foreach ($cats as $key => $col)
+            <div class="col-md-4 col-sm-4 {{ (count($cats) == $key+1) ? 'last-column' : '' }}">
+                @foreach ($col as $iCat)
+                    
+                    <?php
+                        $randomId = '-' . substr(uniqid(rand(), true), 5, 5);
+                    ?>
+                
+                    <div class="cat-list">
+                        <h3 class="cat-title rounded">
+                            <?php $attr = ['countryCode' => config('country.icode'), 'catSlug' => $iCat->slug]; ?>
+                            <a href="{{ lurl(trans('routes.v-search-cat', $attr), $attr) }}">
+                                <i class="{{ $iCat->icon_class or 'icon-ok' }}"></i>
+                                {{ $iCat->name }} <span class="count"></span>
+                            </a>
+                            <span data-target=".cat-id-{{ $iCat->id . $randomId }}" data-toggle="collapse" class="btn-cat-collapsed collapsed">
+                                <span class="icon-down-open-big"></span>
+                            </span>
+                        </h3>
+                        <ul class="cat-collapse collapse in cat-id-{{ $iCat->id . $randomId }} long-list-home">
+                            @if (isset($subCats) and $subCats->has($iCat->tid))
+                                @foreach ($subCats->get($iCat->tid) as $iSubCat)
+                                    <li>
+                                        <?php $attr =  ['countryCode' => config('country.icode'), 'catSlug' => $iCat->slug, 'subCatSlug' => $iSubCat->slug]; ?>
+                                        <a href="{{ lurl(trans('routes.v-search-subCat', $attr), $attr) }}">
+                                            {{ $iSubCat->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
+    </div>
+		
+{{-- @endif --}}
+
+
+
+
 								</div>
 							</div>
-							
-							@if ($loc['showButton'])
-								@if (!auth()->check() and config('settings.single.guests_can_post_ads') != '1')
-									<a class="btn btn-lg btn-add-listing" href="#quickLogin" data-toggle="modal">
-										<i class="fa fa-plus-circle"></i> {{ t('Add Listing') }}
-									</a>
-								@else
-									<a class="btn btn-lg btn-add-listing" href="{{ lurl('posts/create') }}" style="padding-left: 30px; padding-right: 30px; text-transform: none;">
-										<i class="fa fa-plus-circle"></i> {{ t('Add Listing') }}
-									</a>
-								@endif
-							@endif
-	
 						</div>
+					</div>
+					
+					@if ($loc['showButton'])
+						@if (!auth()->check() and config('settings.single.guests_can_post_ads') != '1')
+							<a class="btn btn-lg btn-add-listing" href="#quickLogin" data-toggle="modal">
+								<i class="fa fa-plus-circle"></i> {{ t('Add Listing') }}
+							</a>
+						@else
+							<a class="btn btn-lg btn-add-listing" href="{{ lurl('posts/create') }}" style="padding-left: 30px; padding-right: 30px; text-transform: none;">
+								<i class="fa fa-plus-circle"></i> {{ t('Add Listing') }}
+							</a>
+						@endif
 					@endif
+
 				</div>
-				@endif
+			@endif
+		</div>
+				
 				
 				@include('layouts.inc.tools.svgmap')
 	
@@ -136,5 +169,16 @@ if (isset($citiesOptions)) {
 	@parent
 	@if ($loc['show'] || $map['show'])
 		@include('layouts.inc.modal.location')
+	@endif
+@endsection
+
+
+
+@section('before_scripts')
+	@parent
+	@if (isset($categoriesOptions) and isset($categoriesOptions['max_sub_cats']) and $categoriesOptions['max_sub_cats'] >= 0)
+		<script>
+			var maxSubCats = {{ (int)$categoriesOptions['max_sub_cats'] }};
+		</script>
 	@endif
 @endsection

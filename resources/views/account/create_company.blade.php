@@ -53,7 +53,8 @@
 									<div class="panel-body">
 										<form name="add_company" class="form-horizontal" role="form" method="POST" action="{{ route('add_company') }}" enctype="multipart/form-data">
 											{!! csrf_field() !!}
-												
+											
+											<input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 											<!-- name -->
 											<div class="form-group required <?php echo (isset($errors) and $errors->has('name')) ? 'has-error' : ''; ?>">
 												<label class="col-sm-3 control-label">{{ t('Name') }} <sup>*</sup></label>

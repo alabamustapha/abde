@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2018 at 09:50 PM
+-- Generation Time: Sep 01, 2018 at 03:18 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -206,30 +206,6 @@ INSERT INTO `categories` (`id`, `translation_lang`, `translation_of`, `parent_id
 (82, 'en', 82, 75, 'Massage Services - Relaxation', 'massage-services-relaxation', NULL, NULL, NULL, 293, 294, 2, NULL, 1),
 (83, 'en', 83, 75, 'Adults Products - Articles', 'adults-products-articles', NULL, NULL, NULL, 295, 296, 2, NULL, 1),
 (84, 'en', 84, 75, 'Casual Encounter', 'casual-encounter', NULL, NULL, NULL, 297, 298, 2, NULL, 1),
-(85, 'en', 85, 0, 'Jobs Offers', 'jobs-offers', NULL, 'app/categories/skin-default/mfglabs-users.png', 'icon-megaphone-1', 176, 223, 1, 'job-offer', 1),
-(86, 'en', 86, 85, 'Agriculture - Environment', 'agriculture-environment', NULL, NULL, NULL, 197, 198, 2, NULL, 1),
-(87, 'en', 87, 85, 'Assistantship - Secretariat - Helpdesk', 'assistantship-secretariat-helpdesk', NULL, NULL, NULL, 195, 196, 2, NULL, 1),
-(88, 'en', 88, 85, 'Automotive - Mechanic', 'automotive-mechanic', NULL, NULL, NULL, 191, 192, 2, NULL, 1),
-(89, 'en', 89, 85, 'Others Jobs Offer', 'others-jobs-offer', NULL, NULL, NULL, 189, 190, 2, NULL, 1),
-(90, 'en', 90, 85, 'BTP - Construction - Building', 'btp-construction-building', NULL, NULL, NULL, 187, 188, 2, NULL, 1),
-(91, 'en', 91, 85, 'Trade - Business Services', 'trade-business-services', NULL, NULL, NULL, 185, 186, 2, NULL, 1),
-(92, 'en', 92, 85, 'Commercial - Sale Jobs Offer', 'commercial-sale-jobs-offer', NULL, NULL, NULL, 183, 184, 2, NULL, 1),
-(93, 'en', 93, 85, 'Accounting - Management - Finance', 'accounting-management-finance', NULL, NULL, NULL, 181, 182, 2, NULL, 1),
-(94, 'en', 94, 85, 'Steering - Manager', 'steering-manager', NULL, NULL, NULL, 221, 222, 2, NULL, 1),
-(95, 'en', 95, 85, 'Aesthetics - Hair - Beauty', 'aesthetics-hair-beauty', NULL, NULL, NULL, 193, 194, 2, NULL, 1),
-(96, 'en', 96, 85, 'Public Service Jobs Offer', 'public-service-jobs-offer', NULL, NULL, NULL, 179, 180, 2, NULL, 1),
-(97, 'en', 97, 85, 'Real Estate Jobs Offer', 'real-estate-jobs-offer', NULL, NULL, NULL, 207, 208, 2, NULL, 1),
-(98, 'en', 98, 85, 'Independent - Freelance - Telecommuting', 'independent-freelance-telecommuting', NULL, NULL, NULL, 199, 200, 2, NULL, 1),
-(99, 'en', 99, 85, 'Computers - Internet - Telecommunications', 'computers-internet-telecommunications', NULL, NULL, NULL, 201, 202, 2, NULL, 1),
-(100, 'en', 100, 85, 'Industry, Production & engineering', 'industry-production-engineering', NULL, NULL, NULL, 219, 220, 2, NULL, 1),
-(101, 'en', 101, 85, 'Marketing - Communication', 'marketing-communication', NULL, NULL, NULL, 217, 218, 2, NULL, 1),
-(102, 'en', 102, 85, 'Babysitting - Nanny Work', 'babysitting-nanny-work', NULL, NULL, NULL, 215, 216, 2, NULL, 1),
-(103, 'en', 103, 85, 'HR - Training - Education', 'hr-training-education', NULL, NULL, NULL, 213, 214, 2, NULL, 1),
-(104, 'en', 104, 85, 'Medical - Healthcare - Social', 'medical-healthcare-social', NULL, NULL, NULL, 211, 212, 2, NULL, 1),
-(105, 'en', 105, 85, 'Security - Guarding', 'security-guarding', NULL, NULL, NULL, 177, 178, 2, NULL, 1),
-(106, 'en', 106, 85, 'Household Services - Housekeeping', 'household-services-housekeeping', NULL, NULL, NULL, 209, 210, 2, NULL, 1),
-(107, 'en', 107, 85, 'Tourism - Hotels - Restaurants - Leisure', 'tourism-hotels-restaurants-leisure', NULL, NULL, NULL, 205, 206, 2, NULL, 1),
-(108, 'en', 108, 85, 'Transportation - Logistics', 'transportation-logistics', NULL, NULL, NULL, 203, 204, 2, NULL, 1),
 (109, 'en', 109, 0, 'Job Search', 'job-search', NULL, 'app/categories/skin-default/fa-search.png', 'icon-search', 128, 175, 1, 'job-search', 1),
 (110, 'en', 110, 109, 'Agriculture - Environment', 'agriculture-environment', NULL, NULL, NULL, 129, 130, 2, NULL, 1),
 (111, 'en', 111, 109, 'Assistantship - Secretariat - Helpdesk', 'assistantship-secretariat-helpdesk', NULL, NULL, NULL, 153, 154, 2, NULL, 1),
@@ -309,9 +285,6 @@ INSERT INTO `category_field` (`id`, `category_id`, `field_id`, `disabled_in_subc
 (9, 47, 8, 0, 0, 4, 5, 1),
 (10, 59, 8, 0, NULL, NULL, NULL, NULL),
 (11, 1, 9, 0, 0, 10, 11, 1),
-(12, 85, 10, 0, NULL, NULL, NULL, NULL),
-(13, 85, 11, 0, NULL, NULL, NULL, NULL),
-(14, 85, 12, 0, NULL, NULL, NULL, NULL),
 (15, 109, 12, 0, NULL, NULL, NULL, NULL),
 (16, 9, 13, 0, 0, 2, 3, 1),
 (17, 9, 14, 0, 0, 4, 5, 1),
@@ -7547,6 +7520,30 @@ INSERT INTO `cities` (`id`, `country_code`, `name`, `asciiname`, `latitude`, `lo
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `companies`
+--
+
+CREATE TABLE `companies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `description` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`id`, `name`, `user_id`, `logo`, `description`) VALUES
+(5, 'Alaba Mustapha', 1, 'company/1/JotqCd9COvywoGpUpaLS0vRlhJQSe1WlifwV29FE.jpeg', '<p>lods kshdfsd</p>'),
+(6, 'Vitamin', 1, 'company/1/eh1jHs1uBYgOVkllRjRhqqu1kdRUm9WcGF87arK6.jpeg', NULL),
+(7, 'cMustapha', 1, 'company/1/rvmMW8MCRKTGjoepJ4kGiOBnGMsLWmKh2TKJaeD7.jpeg', NULL),
+(8, 'Alaba Mustapha', 1, 'company/1/afPNku4qj5GqDtobLMPpANim7EGtLKBqtO0KgDzj.jpeg', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `continents`
 --
 
@@ -8345,7 +8342,7 @@ INSERT INTO `home_sections` (`id`, `method`, `name`, `value`, `view`, `field`, `
 (1, 'getSearchForm', 'Search Form Area', NULL, 'home.inc.search', NULL, 0, 0, 1, 1, 1),
 (2, 'getLocations', 'Locations & Country Map', NULL, 'home.inc.locations', NULL, 0, 2, 3, 1, 1),
 (3, 'getSponsoredPosts', 'Sponsored Ads', NULL, 'home.inc.featured', NULL, 0, 4, 5, 1, 1),
-(4, 'getCategories', 'Categories', NULL, 'home.inc.categories', NULL, 0, 6, 7, 1, 1),
+(4, 'getCategories', 'Categories', '{\"type_of_display\":\"c_normal_list\",\"show_icon\":\"0\",\"max_sub_cats\":\"3\",\"max_items\":null,\"cache_expiration\":null,\"active\":\"0\"}', 'home.inc.categories', NULL, 0, 6, 7, 1, 0),
 (5, 'getLatestPosts', 'Latest Ads', NULL, 'home.inc.latest', NULL, 0, 8, 9, 1, 1),
 (6, 'getStats', 'Mini Stats', NULL, 'home.inc.stats', NULL, 0, 10, 11, 1, 1),
 (7, 'getTopAdvertising', 'Advertising #1', NULL, 'layouts.inc.advertising.top', NULL, 0, 12, 13, 1, 0),
@@ -8670,7 +8667,8 @@ CREATE TABLE `pictures` (
 --
 
 INSERT INTO `pictures` (`id`, `post_id`, `filename`, `position`, `active`, `created_at`, `updated_at`) VALUES
-(1, 1, 'files/us/1/5aae45f8eedc2436dd30cfdac07110a3.jpg', 1, 1, '2018-08-09 15:16:11', '2018-08-09 15:16:11');
+(15, 9, 'files/us/9/75d9ab0b983e61aebc5da6f7157e7956.jpg', 1, 1, '2018-08-21 05:56:44', '2018-08-21 05:56:44'),
+(16, 10, 'files/us/10/fbe00d99aa037f77c511386bd27ca1b8.jpg', 1, 1, '2018-08-22 10:43:35', '2018-08-22 10:43:35');
 
 -- --------------------------------------------------------
 
@@ -8684,6 +8682,7 @@ CREATE TABLE `posts` (
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `category_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `post_type_id` int(10) UNSIGNED DEFAULT NULL,
+  `company_id` bigint(20) UNSIGNED DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `tags` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -8718,8 +8717,9 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `country_code`, `user_id`, `category_id`, `post_type_id`, `title`, `description`, `tags`, `price`, `negotiable`, `contact_name`, `email`, `phone`, `phone_hidden`, `address`, `city_id`, `lon`, `lat`, `ip_addr`, `visits`, `email_token`, `phone_token`, `tmp_token`, `verified_email`, `verified_phone`, `reviewed`, `featured`, `archived`, `fb_profile`, `partner`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'US', 0, 58, 1, 'Web developer', '<p>kjk lkjlkj lk<br></p>', NULL, '1500.00', NULL, 'alaba', 'alabamustapha@gmail.com', '803256333', 1, NULL, 5128723, 79.0567, 43.0945, '127.0.0.1', 1, NULL, NULL, NULL, 1, 1, 0, 0, 0, NULL, NULL, '2018-08-09 15:16:01', '2018-08-09 15:16:17', NULL);
+INSERT INTO `posts` (`id`, `country_code`, `user_id`, `category_id`, `post_type_id`, `company_id`, `title`, `description`, `tags`, `price`, `negotiable`, `contact_name`, `email`, `phone`, `phone_hidden`, `address`, `city_id`, `lon`, `lat`, `ip_addr`, `visits`, `email_token`, `phone_token`, `tmp_token`, `verified_email`, `verified_phone`, `reviewed`, `featured`, `archived`, `fb_profile`, `partner`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(9, 'US', 1, 20, 5, 5, 'Web developer', '<p>lorem dgfddgfd<br></p>', 'tag', '100.00', 1, 'Admin admin', 'dummy@gmail.com', '08000000092', NULL, NULL, 5145215, 73.8988, 40.9312, '127.0.0.1', 0, NULL, NULL, NULL, 1, 1, 0, 0, 0, NULL, NULL, '2018-08-21 05:56:36', '2018-08-21 05:56:46', NULL),
+(10, 'US', 1, 48, 4, 0, 'Unirine test that is reasonable to tes your shittiy ass', '<p>lore m epojas daskdjhak sd<br></p>', 'test', '100.00', NULL, 'name', 'dummy@gmail.com', '08000000092', NULL, NULL, 4776222, 76.2852, 36.8468, '127.0.0.1', 2, NULL, NULL, NULL, 1, 1, 0, 0, 0, NULL, NULL, '2018-08-22 10:43:24', '2018-08-25 09:59:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -8735,17 +8735,19 @@ CREATE TABLE `post_types` (
   `lft` int(10) UNSIGNED DEFAULT NULL,
   `rgt` int(10) UNSIGNED DEFAULT NULL,
   `depth` int(10) UNSIGNED DEFAULT NULL,
-  `active` tinyint(1) DEFAULT '1'
+  `active` tinyint(1) DEFAULT '1',
+  `is_pro` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `post_types`
 --
 
-INSERT INTO `post_types` (`id`, `translation_lang`, `translation_of`, `name`, `lft`, `rgt`, `depth`, `active`) VALUES
-(1, 'en', 1, 'Private', NULL, NULL, NULL, 1),
-(2, 'en', 2, 'Professional', NULL, NULL, NULL, 1),
-(4, 'en', 4, 'New types', NULL, NULL, NULL, 1);
+INSERT INTO `post_types` (`id`, `translation_lang`, `translation_of`, `name`, `lft`, `rgt`, `depth`, `active`, `is_pro`) VALUES
+(1, 'en', 1, 'Private', NULL, NULL, NULL, 1, 0),
+(2, 'en', 2, 'Professional', NULL, NULL, NULL, 1, 0),
+(4, 'en', 4, 'New types', NULL, NULL, NULL, 1, 0),
+(5, 'en', 5, 'Is pro test', NULL, NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -8791,14 +8793,6 @@ CREATE TABLE `post_values` (
   `option_id` int(10) UNSIGNED DEFAULT NULL,
   `value` text COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `post_values`
---
-
-INSERT INTO `post_values` (`id`, `post_id`, `field_id`, `option_id`, `value`) VALUES
-(1, 1, 18, NULL, '132'),
-(2, 1, 8, NULL, '11');
 
 -- --------------------------------------------------------
 
@@ -8947,14 +8941,14 @@ INSERT INTO `settings` (`id`, `key`, `name`, `value`, `description`, `field`, `p
 (1, 'app', 'Application', '{\"purchase_code\":\"f2102079-449b-4afd-981d-8db76bc9d904\",\"name\":\"ABDE\",\"slogan\":\"ABDE\",\"email\":\"alabamustapha@gmail.com\"}', 'Application Setup', NULL, 0, 2, 3, 1, 1, NULL, NULL),
 (2, 'style', 'Style', NULL, 'Style Customization', NULL, 0, 4, 5, 1, 1, NULL, NULL),
 (3, 'listing', 'Listing & Search', NULL, 'Listing & Search Options', NULL, 0, 6, 7, 1, 1, NULL, NULL),
-(4, 'single', 'Ads Single Page', NULL, 'Ads Single Page Options', NULL, 0, 8, 9, 1, 1, NULL, NULL),
+(4, 'single', 'Ads Single Page', '{\"pictures_limit\":\"5\",\"tags_limit\":\"15\",\"guests_can_post_ads\":\"1\",\"posts_review_activation\":\"0\",\"guests_can_contact_seller\":\"1\",\"simditor_wysiwyg\":\"1\",\"ckeditor_wysiwyg\":\"0\",\"show_post_on_googlemap\":\"0\",\"activation_facebook_comments\":\"1\"}', 'Ads Single Page Options', NULL, 0, 8, 9, 1, 1, NULL, NULL),
 (5, 'mail', 'Mail', '{\"email_sender\":\"alabamustapha@gmail.com\",\"driver\":\"mail\"}', 'Mail Sending Configuration', NULL, 0, 10, 11, 1, 1, NULL, NULL),
 (6, 'sms', 'SMS', NULL, 'SMS Sending Configuration', NULL, 0, 12, 13, 1, 1, NULL, NULL),
 (7, 'seo', 'SEO', NULL, 'SEO Tools', NULL, 0, 14, 15, 1, 1, NULL, NULL),
 (8, 'upload', 'Upload', NULL, 'Upload Settings', NULL, 0, 16, 17, 1, 1, NULL, NULL),
 (9, 'geo_location', 'Geo Location', '{\"default_country_code\":\"US\"}', 'Geo Location Configuration', NULL, 0, 18, 19, 1, 1, NULL, NULL),
 (10, 'security', 'Security', NULL, 'Security Options', NULL, 0, 20, 21, 1, 1, NULL, NULL),
-(11, 'social_auth', 'Social Login', NULL, 'Social Network Login', NULL, 0, 22, 23, 1, 1, NULL, NULL),
+(11, 'social_auth', 'Social Login', '{\"social_login_activation\":\"1\",\"facebook_client_id\":\"328363101243369\",\"facebook_client_secret\":null,\"google_client_id\":null,\"google_client_secret\":null}', 'Social Network Login', NULL, 0, 22, 23, 1, 1, NULL, NULL),
 (12, 'social_link', 'Social Network', NULL, 'Social Network Profiles', NULL, 0, 24, 25, 1, 1, NULL, NULL),
 (13, 'other', 'Others', NULL, 'Other Options', NULL, 0, 26, 27, 1, 1, NULL, NULL),
 (14, 'cron', 'Cron', NULL, 'Cron Job', NULL, 0, 28, 29, 1, 1, NULL, NULL),
@@ -12691,7 +12685,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `country_code`, `language_code`, `user_type_id`, `gender_id`, `name`, `about`, `phone`, `phone_hidden`, `username`, `email`, `password`, `remember_token`, `is_admin`, `can_be_impersonated`, `disable_comments`, `receive_newsletter`, `receive_advice`, `ip_addr`, `provider`, `provider_id`, `email_token`, `phone_token`, `verified_email`, `verified_phone`, `blocked`, `closed`, `last_login_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'US', NULL, 1, 1, 'Alaba Mustapha', 'Administrator', NULL, 0, NULL, 'alabamustapha@gmail.com', '$2y$10$SDQLng3blag5RGpxHoNXmu0F8VWo3rf38oH3onTIXyi4gaOWAF5/2', NULL, 1, 1, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 0, 0, '2018-08-09 08:17:14', NULL, '2018-08-09 16:17:14', NULL);
+(1, 'US', NULL, 1, 1, 'Alaba Mustapha', 'Administrator', NULL, 0, NULL, 'alabamustapha@gmail.com', '$2y$10$SDQLng3blag5RGpxHoNXmu0F8VWo3rf38oH3onTIXyi4gaOWAF5/2', 'IeVuuodp3CdRrFlEsbJzt9AM4LnJOzOBU5Pa8yc2RXNrwAzSVtkr0u5AluFO', 1, 1, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 0, 0, '2018-08-29 09:27:19', NULL, '2018-08-29 17:27:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -12765,6 +12759,12 @@ ALTER TABLE `cities`
   ADD KEY `subadmin1_code` (`subadmin1_code`),
   ADD KEY `subadmin2_code` (`subadmin2_code`),
   ADD KEY `active` (`active`);
+
+--
+-- Indexes for table `companies`
+--
+ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `continents`
@@ -13090,6 +13090,12 @@ ALTER TABLE `category_field`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
+-- AUTO_INCREMENT for table `companies`
+--
+ALTER TABLE `companies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `continents`
 --
 ALTER TABLE `continents`
@@ -13183,19 +13189,19 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `post_types`
 --
 ALTER TABLE `post_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `post_type_field`
@@ -13207,7 +13213,7 @@ ALTER TABLE `post_type_field`
 -- AUTO_INCREMENT for table `post_values`
 --
 ALTER TABLE `post_values`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `report_types`

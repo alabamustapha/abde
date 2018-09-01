@@ -116,7 +116,10 @@ if (isset($citiesOptions)) {
 			</div>
 		</div>
 	@endif
-	<div class="{{ $rightClassCol }} text-center">
+    <div class="{{ $rightClassCol }} text-center" style="padding-top: 21px">
+        <h2 class="title-3" style="white-space: nowrap;">
+                <i class="icon-location-2"></i>&nbsp;{{ t('Choose a city or region') }}
+            </h2>
 		<div id="countryMap" class="page-sidebar col-thin-left no-padding" style="margin: auto;">&nbsp;</div>
 	</div>
 @endif

@@ -117,6 +117,7 @@ class CompaniesController extends AccountBaseController
         
         $path = '';
         
+        dd($request->all());
         $company = Company::create([
             'name' => $request->name,
             'description' => $request->description,
