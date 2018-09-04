@@ -44,7 +44,9 @@
 							<div class="col-md-5 col-xs-4 col-xxs-12">
 								<h3 class="no-padding text-center-480 useradmin">
 									<a href="">
-										@if (!empty($gravatar))
+										@if($user->img_url)
+											<img class="userImg" src="{{ url('storage/' . $user->img_url) }}" alt="user">&nbsp;
+										@elseif (!empty($gravatar))
 											<img class="userImg" src="{{ $gravatar }}" alt="user">&nbsp;
 										@else
 											<img class="userImg" src="{{ url('images/user.jpg') }}" alt="user">
@@ -129,6 +131,33 @@
 								</div>
 								<div class="panel-collapse collapse {{ (old('panel')=='' or old('panel')=='userPanel') ? 'in' : '' }}" id="userPanel">
 									<div class="panel-body">
+
+										<form class="form-horizontal" id="postForm" method="POST" action="{{ url()->current() }}" enctype="multipart/form-data">
+											{!! csrf_field() !!}
+											<input type="hidden" name="id" value="{{ auth()->user()->id }}">
+											<fieldset>
+												<!-- Profile picture -->
+												<div id="picturesBloc" class="form-group <?php echo (isset($errors) and $errors->has('pictures')) ? 'has-error' : ''; ?>">
+													<label class="col-md-3 control-label" for="pictures"> {{ _('Profile picture') }} </label>
+													<div class="col-md-8"> </div>
+													<div class="col-md-12" style="position: relative; float: {!! (config('lang.direction')=='rtl') ? 'left' : 'right' !!}; padding-top: 10px; text-align: center;">
+														<div {!! (config('lang.direction')=='rtl') ? 'dir="rtl"' : '' !!} class="file-loading mb10">
+															<input id="pictureField" name="picture" type="file" multiple class="file picimg">
+														</div>
+														<p class="help-block">
+															{{ _('Upload profile image') }}
+														</p>
+													</div>
+												</div>
+											
+												<div id="uploadError" style="margin-top:10px; display:none"></div>
+												<div id="uploadSuccess" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>
+											
+												<div style="margin-bottom: 30px;"></div>
+											
+											</fieldset>
+										</form>
+
 										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ url()->current() }}">
 											{!! csrf_field() !!}
 											<input name="_method" type="hidden" value="PUT">
@@ -239,7 +268,7 @@
 							</div>
 							
 							<!-- SETTINGS -->
-							<div class="panel panel-default">
+							<div class="panel panel-default" style="display: none">
 								<div class="panel-heading">
 									<h4 class="panel-title"><a href="#settingsPanel" data-toggle="collapse" data-parent="#accordion"> {{ t('Settings') }} </a></h4>
 								</div>
@@ -289,7 +318,7 @@
 									</div>
 								</div>
 							</div>
-
+							
 						</div>
 						<!--/.row-box End-->
 
@@ -304,5 +333,73 @@
 	<!-- /.main-container -->
 @endsection
 
-@section('after_scripts')
+@section('after_styles')
+    <link href="{{ url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css') }}" rel="stylesheet">
+	@if (config('lang.direction') == 'rtl')
+		<link href="{{ url('assets/plugins/bootstrap-fileinput/css/fileinput-rtl.min.css') }}" rel="stylesheet">
+	@endif
+    <style>
+        .krajee-default.file-preview-frame:hover:not(.file-preview-error) {
+            box-shadow: 0 0 5px 0 #666666;
+        }
+		.file-loading:before {
+			content: " {{ t('Loading') }}...";
+		}
+    </style>
 @endsection
+
+@section('after_scripts')
+    <script src="{{ url('assets/plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js') }}" type="text/javascript"></script>
+    @if (file_exists(public_path() . '/assets/plugins/bootstrap-fileinput/js/locales/'.config('app.locale').'.js'))
+        <script src="{{ url('assets/plugins/bootstrap-fileinput/js/locales/'.config('app.locale').'.js') }}" type="text/javascript"></script>
+    @endif
+   
+	<script>
+			/* Initialize with defaults (pictures) */
+			
+			<?php
+				// Get Upload Url
+				$uploadUrl = lurl('account/profile_image/');
+			?>
+				$('#pictureField').fileinput(
+				{
+					language: '{{ config('app.locale') }}',
+					@if (config('lang.direction') == 'rtl')
+						rtl: true,
+					@endif
+					overwriteInitial: true,
+					showCaption: false,
+					showPreview: true,
+					allowedFileExtensions: {!! getUploadFileTypes('image', true) !!},
+					uploadUrl: '{{ $uploadUrl }}',
+					uploadAsync: false,
+					showBrowse: false,
+					showCancel: true,
+					showUpload: true,
+					showRemove: false,
+					maxFileSize: {{ (int)config('settings.upload.max_file_size', 1000) }},
+					browseOnZoneClick: true,
+					minFileCount: 0,
+					maxFileCount: 1,
+					autoReplace: true,
+					validateInitialCount: true,
+					uploadClass: 'btn btn-success',
+					elErrorContainer: '#uploadError',
+					initialPreview: [ "{{ url('storage/' . $user->img_url) }}" ],
+					initialPreviewAsData: true,
+					initialPreviewFileType: 'image',
+				
+				});
+	
+
+			    $('#pictureField').on('fileuploaded', function(event, data, previewId, index) {
+					var form = data.form, files = data.files, extra = data.extra,
+						response = data.response, reader = data.reader;
+					console.log('File uploaded triggered');
+				});
+
+		</script>
+    
+@endsection
+

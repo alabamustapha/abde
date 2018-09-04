@@ -126,6 +126,9 @@
 							<a {!! ($pagePath=='close') ? 'class="active"' : '' !!} href="{{ lurl('account/close') }}">
 								<i class="icon-cancel-circled "></i> {{ t('Close account') }}
 							</a>
+							<a {!! ($pagePath=='settings') ? 'class="active"' : '' !!} href="{{ lurl('account/settings') }}">
+								<i class="icon-cancel-circled "></i> {{ t('Settings') }}
+							</a>
 						</li>
 					</ul>
 				</div>

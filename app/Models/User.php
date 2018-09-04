@@ -23,10 +23,14 @@ use App\Models\Traits\CountryTrait;
 use App\Models\Scopes\VerifiedScope;
 use App\Models\Scopes\LocalizedScope;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\Facades\Image;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use App\Notifications\ResetPasswordNotification;
+
+
 
 class User extends BaseUser
 {
@@ -93,6 +97,7 @@ class User extends BaseUser
 		'verified_phone',
         'blocked',
         'closed',
+        'img_url',
     ];
     
     /**
@@ -444,4 +449,85 @@ class User extends BaseUser
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setImgUrlAttribute($value)
+	{
+		$attribute_name = 'img_url';
+		
+		// Path
+		$destination_path = 'files/profile/';
+		
+		// If the image was erased
+		if (empty($value)) {
+			// delete the image from disk
+			if (!str_contains($this->{$attribute_name}, config('larapen.core.picture.default'))) {
+				Storage::delete($this->{$attribute_name});
+			}
+			
+			// set null in the database column
+			$this->attributes[$attribute_name] = null;
+			
+			return false;
+		}
+		
+		// Check the image file
+		if ($value == url('/')) {
+			$this->attributes[$attribute_name] = null;
+			
+			return false;
+		}
+		
+		// If laravel request->file('filename') resource OR base64 was sent, store it in the db
+		try {
+			if (fileIsUploaded($value)) {
+				// Get file extension
+				$extension = getUploadedFileExtension($value);
+				if (empty($extension)) {
+					$extension = 'jpg';
+				}
+				
+				// Image default sizes
+				$width = (int)config('larapen.core.picture.size.width', 1000);
+				$height = (int)config('larapen.core.picture.size.height', 1000);
+				
+				// Make the image
+				if (exifExtIsEnabled()) {
+					$image = Image::make($value)->orientate()->resize($width, $height, function ($constraint) {
+						$constraint->aspectRatio();
+					})->encode($extension, config('larapen.core.picture.quality', 100));
+				} else {
+					$image = Image::make($value)->resize($width, $height, function ($constraint) {
+						$constraint->aspectRatio();
+					})->encode($extension, config('larapen.core.picture.quality', 100));
+				}
+				
+				
+				// Generate a filename.
+				$filename = md5($this->email) . '.' . $extension;
+				
+				// Store the image on disk.
+				Storage::put($destination_path . '/' . $filename, $image->stream());
+				
+				// Save the path to the database
+				$this->attributes[$attribute_name] = $destination_path . '/' . $filename;
+			} else {
+				// Retrieve current value without upload a new file.
+				if (starts_with($value, config('larapen.core.picture.default'))) {
+					$value = null;
+				} else {
+					if (!starts_with($value, 'files/')) {
+						$value = $destination_path . last(explode($destination_path, $value));
+					}
+				}
+				$this->attributes[$attribute_name] = $value;
+			}
+		} catch (\Exception $e) {
+        
+            flash($e->getMessage())->error();
+        
+            $this->attributes[$attribute_name] = null;
+			
+			return false;
+		}
+	}
 }

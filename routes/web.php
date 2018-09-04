@@ -293,8 +293,10 @@ Route::group([
 			
 			// Users
 			Route::get('account', 'EditController@index');
+			Route::get('account/settings', 'EditController@settings');
 			Route::group(['middleware' => 'impersonate.protect'], function () {
 				Route::put('account', 'EditController@updateDetails');
+				Route::POST('account/profile_image', 'EditController@updateProfileImage');
 				Route::put('account/settings', 'EditController@updateSettings');
 				Route::put('account/preferences', 'EditController@updatePreferences');
 			});

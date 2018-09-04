@@ -154,6 +154,9 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 								<a href="{!! qsurl(config('app.locale').'/'.trans('routes.v-search', ['countryCode' => config('country.icode')]), array_merge(Request::except(['l', 'location']), ['l'=>$post->city_id])) !!}" class="info-link">{{ $city->name }}</a> {{ (isset($post->distance)) ? '- ' . round(lengthPrecision($post->distance), 2) . unitOfLength() : '' }}
 								</span>
 							</span>
+							<p>
+								{!! str_limit($post->description, 200) !!}
+							</p>
 							</div>
 							
 							{{-- 							
@@ -177,11 +180,12 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 									{{ '--' }}
 								@endif
 							</h4> --}}
-
-							
+{{-- 
 							<p>
 								{!! str_limit($post->description, 200) !!}
-							</p>
+							</p> --}}
+							
+							
 							
 							@if (isset($package) and !empty($package))
 								@if ($package->has_badge == 1)

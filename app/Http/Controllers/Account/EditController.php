@@ -31,6 +31,7 @@ use Creativeorange\Gravatar\Facades\Gravatar;
 use App\Http\Controllers\Auth\Traits\VerificationTrait;
 use App\Helpers\Localization\Country as CountryLocalization;
 use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
+use Intervention\Image\Facades\Image;
 
 class EditController extends AccountBaseController
 {
@@ -69,6 +70,37 @@ class EditController extends AccountBaseController
 		MetaTag::set('description', t('My account on :app_name', ['app_name' => config('settings.app.app_name')]));
 		
 		return view('account.edit', $data);
+	}
+	public function settings()
+	{
+		$data = [];
+		
+		$data['countries'] = CountryLocalizationHelper::transAll(CountryLocalization::getCountries());
+		$data['genders'] = Gender::trans()->get();
+		$data['gravatar'] = (!empty(auth()->user()->email)) ? Gravatar::fallback(url('images/user.jpg'))->get(auth()->user()->email) : null;
+		
+		// Mini Stats
+		$data['countPostsVisits'] = DB::table('posts')
+			->select('user_id', DB::raw('SUM(visits) as total_visits'))
+			->where('country_code', config('country.code'))
+			->where('user_id', auth()->user()->id)
+			->groupBy('user_id')
+			->first();
+
+		$data['countPosts'] = Post::currentCountry()
+			->where('user_id', auth()->user()->id)
+			->count();
+		$data['countFavoritePosts'] = SavedPost::whereHas('post', function ($query) {
+			$query->currentCountry();
+		})->where('user_id', auth()->user()->id)
+			->count();
+		
+			
+		// Meta Tags
+		MetaTag::set('title', t('My account'));
+		MetaTag::set('description', t('My account on :app_name', ['app_name' => config('settings.app.app_name')]));
+		
+		return view('account.settings', $data);
 	}
 	
 	/**
@@ -173,6 +205,74 @@ class EditController extends AccountBaseController
 		flash(t("Your settings account has updated successfully."))->success();
 		
 		return redirect(config('app.locale') . '/account');
+	}
+	
+	/**
+	 * @param Request $request
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+	public function updateProfileImage(Request $request)
+	{
+		
+		// Get User
+		$user = User::find(auth()->user()->id);
+	
+		
+		
+		// Save all pictures
+		$picture = [];
+		$file = $request->file('picture');
+		
+		if (!empty($file)) {
+			
+
+		
+		// Post Picture in database
+		// $user->img_url = $file;
+
+		$user->update([
+			'img_url' => $file
+		]);
+		
+		$user->save();
+
+		return $user;	
+		
+		// Ajax response
+		if ($request->ajax()) {
+			$data = [];
+			$data['initialPreview'] = [];
+			$data['initialPreviewConfig'] = [];
+	
+			// Get Deletion Url
+			
+			$initialPreviewConfigUrl = lurl('account/delete_profile_image');
+			
+			
+			// Build Bootstrap-Input plugin's parameters
+			$data['initialPreview'][] = resize($this->img_url);
+			$data['initialPreviewConfig'][] = [
+				'caption' => last(explode('/', $this->img_url)),
+				'size'    => (int)File::size(filePath($this->img_url)),
+				'url'     => $initialPreviewConfigUrl,
+				'key'     => $this->id,
+				'extra'   => ['id' => $this->id],
+			];
+				
+			return response()->json($data);
+		}
+		
+
+
+		}
+		
+		
+	
+		
+		
+		
+		
+		
 	}
 	
 	/**
