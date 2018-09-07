@@ -252,6 +252,92 @@
 												</div>
 											</div>
 
+												<input type="hidden" name="countryCode" value="US" id="countryCode">
+												
+												<!-- country_id -->
+												<div id="cityBox" class="form-group required <?php echo (isset($errors) and $errors->has('city_id')) ? 'has-error' : ''; ?>">
+													<label class="col-md-3 control-label" for="country_id">{{ t('Country') }} <sup>*</sup></label>
+													<div class="col-md-9">
+														<select id="countryId" name="country_id" class="form-control sselecter">
+															<option value="0" {{ (!old('country_id') or old('country_id')==0) ? 'selected="selected"' : '' }}>
+																{{ t('Select a country') }}
+															</option>
+															@foreach($countries as $country)
+															<option value="{{ $country->id }}" {{ $user->country_id == $country->id ? 'selected="selected"' : '' }} data-code={{ $country->code }}>
+																{{ $country->name }}
+															</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+												
+												<!-- city_id -->
+												<div id="cityBox" class="form-group required <?php echo (isset($errors) and $errors->has('city_id')) ? 'has-error' : ''; ?>">
+													<label class="col-md-3 control-label" for="city_id">{{ t('City') }} <sup>*</sup></label>
+													<div class="col-md-9">
+														<select id="cityId" name="city_id" class="form-control sselecter">
+															<option value="0" {{ (!old('city_id') or old('city_id')==0) ? 'selected="selected"' : '' }}>
+																{{ t('Select a city') }}
+															</option>
+														</select>
+													</div>
+												</div>
+												<!-- Address -->
+												<div class="form-group required <?php echo (isset($errors) and $errors->has('address')) ? 'has-error' : ''; ?>">
+													<label class="col-sm-3 control-label">{{ t('Address') }}</label>
+													<div class="col-sm-9">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="icon-location"></i></span>
+															<input id="address" name="address" class="form-control" value="{{ $user->address}}" type="text">
+														</div>			
+													</div>
+												</div>
+												
+												<!-- Fax -->
+												<div class="form-group required <?php echo (isset($errors) and $errors->has('fax')) ? 'has-error' : ''; ?>">
+													<label class="col-sm-3 control-label">{{ t('Fax') }}</label>
+													<div class="col-sm-9">
+													<div class="input-group">			
+															<span class="input-group-addon"><i class="icon-print"></i></span>
+															<input id="fax" name="fax" class="form-control" value="{{ $user->fax }}" type="text">
+														</div>			
+													</div>
+												</div>
+												
+												
+												<!-- Website -->
+												<div class="form-group required <?php echo (isset($errors) and $errors->has('website')) ? 'has-error' : ''; ?>">
+													<label class="col-sm-3 control-label">{{ t('Website') }}</label>
+													<div class="col-sm-9">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="icon-globe"></i></span>
+															<input id="website" name="website" class="form-control" value="{{ $user->website }}" type="text">
+														</div>			
+													</div>
+												</div>
+												
+												<!-- Facebook -->
+												<div class="form-group required <?php echo (isset($errors) and $errors->has('facebook')) ? 'has-error' : ''; ?>">
+													<label class="col-sm-3 control-label">{{ t('Facebook') }}</label>
+													<div class="col-sm-9">
+														<div class="input-group">
+															<span class="input-group-addon">
+																	<i class="icon-facebook fa"></i>
+															</span>
+															<input id="facebook" name="facebook" class="form-control" value="{{ $user->facebook }}" type="text">
+														</div>			
+													</div>
+												</div>
+												
+												<!-- About -->
+												<div class="form-group required <?php echo (isset($errors) and $errors->has('about')) ? 'has-error' : ''; ?>">
+													<label class="col-sm-3 control-label">{{ t('About me') }}</label>
+													<div class="col-sm-9">
+														<textarea class="form-control" name="about" id="about" cols="30" rows="10">{{ $user->about }}</textarea>
+													</div>
+												</div>
+												
+
 											<div class="form-group">
 												<div class="col-sm-offset-3 col-sm-9"></div>
 											</div>
@@ -400,6 +486,18 @@
 				});
 
 		</script>
+
+		
+<script>
+	$("#countryId").change(function(){
+		let code = $("#countryId option:selected").data('code');
+
+		$('input#countryCode').val(code);
+
+		console.log($('input#countryCode').val());
+	});
+</script>
+<script src="{{ url('assets/js/app/d.select.location.js') . vTime() }}"></script>	
     
 @endsection
 

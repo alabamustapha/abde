@@ -15,6 +15,7 @@
 
 namespace App\Models;
 
+use App\Models\Country;
 use Larapen\Admin\app\Models\Crud;
 use Illuminate\Support\Facades\Request;
 
@@ -61,7 +62,18 @@ class Company extends BaseModel
 		'user_id',
 		'name',
 		'logo',
+		'country_id',
+		'city_id',
+		'address',
+		'phone',
+		'fax',
+		'email',
+		'website',
+		'facebook',
+		// 'created_at'
 	];
+
+	protected $dates = ['created_at'];
 	
 	/**
 	 * The attributes that should be hidden for arrays
@@ -126,6 +138,10 @@ class Company extends BaseModel
 
 	public function posts(){
 		return $this->hasMany(Post::class, 'company_id');
+	}
+
+	public function country(){
+		return $this->belongsTo(Country::class, 'country_id');
 	}
 	
 	

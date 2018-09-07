@@ -18,6 +18,38 @@
 ?>
 @extends('layouts.master')
 
+@section('after_styles')
+	<style>
+		.profile-info{
+			background-color: #eee;
+			margin-bottom: 20px;
+			border: 1px solid #eee;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+		.profile-name{
+			padding-bottom: 0;
+		}
+		.profile-description{
+			padding-top: 25px;
+		}
+		.profile-description > p{
+			font-weight: lighter;
+			text-align: left;
+		}
+		.profile-info-row{
+			margin-bottom: 8px;
+			/* font-weight: lighter; */
+		}
+
+
+		.profile-info-row > .value{
+			font-weight: bold;
+		}
+	</style>
+@endsection
+
+
 @section('search')
 	@parent
 	@include('search.inc.form')
@@ -52,6 +84,129 @@
                 @endif
 
 				<!-- Content -->
+				@if(isset($isCompany) and isset($company))
+					@if($isCompany)
+					
+						<div class="profile-info">
+							<div class="row">
+								<div class="container">
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-4 text-center">
+											<img class="img-responsive" src="{{ asset('storage/' . $company->logo) }}" alt="">
+											<h3 class="text-primary profile-name">{{ $company->name }}</h3>
+											<span>Location: <strong class="text-primary">{{ $companyLocation }}</strong></span><br>
+											<span>Joined: <strong>{{ $company->created_at->diffForHumans() }}<strong></span>
+
+												
+										</div>
+										<div class="col-md-8 profile-description">
+											{!! $company->description !!}
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4" style="padding-top: 15px;">
+									<h2>Contact information</h2>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Address:
+										</div>
+										<div class="col-md-6">
+											{{ $company->address }}
+										</div>
+									</div>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Phone:
+										</div>
+										<div class="col-md-6">
+											{{ $company->phone }}
+										</div>
+									</div>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Fax:
+										</div>
+										<div class="col-md-6">
+											{{ $company->fax }}
+										</div>
+									</div>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Website:
+										</div>
+										<div class="col-md-6">
+												<a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					
+						
+					@endif
+				
+				@else
+					@if(isset($user))
+						<div class="profile-info">
+							<div class="row">
+								<div class="container">
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-4 text-center">
+											<img class="img-responsive" src="{{ asset('storage/' . $user->img_url) }}" alt="">
+											<h3 class="text-primary profile-name">{{ $user->name }}</h3>
+											<span>Location: <strong class="text-primary">{{ $user->country_code }}</strong></span><br>
+											<span>Joined: <strong>{{ $user->created_at->diffForHumans() }}</strong></span>
+
+												
+										</div>
+										<div class="col-md-8 profile-description">
+											{!! $user->about !!}
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4" style="padding-top: 15px;">
+									<h2>Contact information</h2>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Address:
+										</div>
+										<div class="col-md-6">
+											{{ $user->address }}
+										</div>
+									</div>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Phone:
+										</div>
+										<div class="col-md-6">
+											{{ $user->phone }}
+										</div>
+									</div>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Fax:
+										</div>
+										<div class="col-md-6">
+											{{ $user->fax }}
+										</div>
+									</div>
+									<div class="row profile-info-row">
+										<div class="col-md-6 title">
+											Website:
+										</div>
+										<div class="col-md-6">
+												<a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a>
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					@endif	
+				@endif
 				<div class="{{ $contentColSm }} page-content col-thin-left">
 					<div class="category-list">
 						<div class="tab-box">
@@ -250,7 +405,7 @@
 					</div>
 
 				</div>
-				
+			
 				<div style="clear:both;"></div>
 
 				<!-- Advertising -->

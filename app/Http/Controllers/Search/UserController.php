@@ -15,8 +15,9 @@
 
 namespace App\Http\Controllers\Search;
 
-use App\Helpers\Search;
 use App\Models\User;
+use App\Helpers\Search;
+use App\Models\Company;
 use Torann\LaravelMetaTags\Facades\MetaTag;
 
 class UserController extends BaseController
@@ -31,6 +32,13 @@ class UserController extends BaseController
      */
     public function index($countryCode, $userId = null)
     {
+        
+        
+        $cid = '';
+        if(\Request::has('cid')){
+            $cid = \Request::get('cid');
+        }
+
         // Check multi-countries site parameters
         if (!config('settings.seo.multi_countries_urls')) {
             $userId = $countryCode;
@@ -45,10 +53,10 @@ class UserController extends BaseController
         if (!empty($this->sUser->username)) {
         	$attr = ['countryCode' => $countryCode, 'username' => $this->sUser->username];
             $url = lurl(trans('routes.v-search-username', $attr), $attr);
-            headerLocation($url);
+            headerLocation($url . '?cid=' . $cid);
         }
 
-        return $this->searchByUserId($this->sUser->id);
+        return $this->searchByUserId($this->sUser->id, null, $cid);
     }
 
     /**
@@ -58,6 +66,13 @@ class UserController extends BaseController
      */
     public function profile($countryCode, $username = null)
     {
+        
+        $cid = '';
+        if(\Request::has('cid')){
+            $cid = \Request::get('cid');
+        }
+
+
         // Check multi-countries site parameters
         if (!config('settings.seo.multi_countries_urls')) {
             $username = $countryCode;
@@ -68,7 +83,7 @@ class UserController extends BaseController
         // Get User
         $this->sUser = User::where('username', $username)->firstOrFail();
 
-        return $this->searchByUserId($this->sUser->id, $this->sUser->username);
+        return $this->searchByUserId($this->sUser->id, $this->sUser->username, $cid);
     }
     
 	/**
@@ -76,21 +91,26 @@ class UserController extends BaseController
 	 * @param null $username
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-    private function searchByUserId($userId, $username = null)
+    private function searchByUserId($userId, $username = null, $cid = null)
     {
         
-        // Search
-        if(\Request::has('cid')){
-            $cid = \Request::get('cid');
-        }else{
-            $cid = 0;
-        }
-
-        // dd($cid);
-
         $search = new Search();
+        
         $data = $search->setUser($userId, $cid)->setRequestFilters()->fetch();
 
+        $isCompany = !(is_null($cid) || $cid == ''); 
+        $data['isCompany'] = $isCompany;
+        
+       
+        if($cid && $cid !== ''){
+            $data['company'] = Company::with('country')->find($cid);
+            $data['companyLocation'] = \DB::table('countries')->select('asciiname')->find($data['company']->country_id);
+            
+            $data['companyLocation'] = $data['companyLocation']->asciiname;
+          
+        }
+
+        $data['user'] = User::find($userId);    
 
         // Get Titles
         $bcTab = $this->getBreadcrumb();

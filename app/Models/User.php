@@ -98,6 +98,12 @@ class User extends BaseUser
         'blocked',
         'closed',
         'img_url',
+        'country_id',
+        'city_id',
+        'fax',
+        'website',
+        'facebook',
+        'address',
     ];
     
     /**

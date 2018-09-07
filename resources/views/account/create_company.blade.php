@@ -44,7 +44,7 @@
 					<div class="inner-box">
 					
 						<div class="panel-group" id="accordion">
-							<!-- USER -->
+							<!-- Company -->
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title"><a href="#userPanel" data-toggle="collapse" data-parent="#accordion"> {{ t('Add company') }} </a></h4>
@@ -91,8 +91,6 @@
 								</div>
 							</div>
 							
-						
-
 						</div>
 						<!--/.row-box End-->
 

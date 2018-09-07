@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2018 at 03:18 PM
+-- Generation Time: Sep 07, 2018 at 04:49 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -7528,18 +7528,27 @@ CREATE TABLE `companies` (
   `name` varchar(255) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `logo` varchar(255) NOT NULL,
-  `description` text
+  `description` text,
+  `country_id` int(10) UNSIGNED DEFAULT NULL,
+  `city_id` int(10) UNSIGNED DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`id`, `name`, `user_id`, `logo`, `description`) VALUES
-(5, 'Alaba Mustapha', 1, 'company/1/JotqCd9COvywoGpUpaLS0vRlhJQSe1WlifwV29FE.jpeg', '<p>lods kshdfsd</p>'),
-(6, 'Vitamin', 1, 'company/1/eh1jHs1uBYgOVkllRjRhqqu1kdRUm9WcGF87arK6.jpeg', NULL),
-(7, 'cMustapha', 1, 'company/1/rvmMW8MCRKTGjoepJ4kGiOBnGMsLWmKh2TKJaeD7.jpeg', NULL),
-(8, 'Alaba Mustapha', 1, 'company/1/afPNku4qj5GqDtobLMPpANim7EGtLKBqtO0KgDzj.jpeg', NULL);
+INSERT INTO `companies` (`id`, `name`, `user_id`, `logo`, `description`, `country_id`, `city_id`, `address`, `phone`, `fax`, `email`, `website`, `facebook`, `created_at`) VALUES
+(5, 'Alaba Mustapha', 1, 'company/1/JotqCd9COvywoGpUpaLS0vRlhJQSe1WlifwV29FE.jpeg', '<p>lods kshdfsd</p>', 235, 5368361, 'House 110, Supreme Court Quarters Karu, Abuja', '08095034525', '422323', 'alabamustapha@gmail.com', 'http://alabamustapha.wordpress.com', 'http://alabamustapha.wordpress.com', '2018-09-06 10:01:15'),
+(6, 'Vitamin', 1, 'company/1/eh1jHs1uBYgOVkllRjRhqqu1kdRUm9WcGF87arK6.jpeg', '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde dolores quibusdam ducimus inventore maxime libero facere reprehenderit harum ipsa tenetur dicta molestiae autem esse, illo nostrum doloremque? Cumque, saepe maiores?</p>', 25, NULL, 'House 110, Supreme Court Quarters Karu, Abuja', '08095034525', '422323', 'alabamustapha@gmail.com', 'http://alabamustapha.wordpress.com', 'http://alabamustapha.wordpress.com', '2018-09-06 10:01:15'),
+(7, 'cMustapha', 1, 'company/1/rvmMW8MCRKTGjoepJ4kGiOBnGMsLWmKh2TKJaeD7.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-09-07 10:01:15'),
+(8, 'Alaba Mustapha', 1, 'company/1/afPNku4qj5GqDtobLMPpANim7EGtLKBqtO0KgDzj.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-09-07 10:01:15');
 
 -- --------------------------------------------------------
 
@@ -8668,7 +8677,9 @@ CREATE TABLE `pictures` (
 
 INSERT INTO `pictures` (`id`, `post_id`, `filename`, `position`, `active`, `created_at`, `updated_at`) VALUES
 (15, 9, 'files/us/9/75d9ab0b983e61aebc5da6f7157e7956.jpg', 1, 1, '2018-08-21 05:56:44', '2018-08-21 05:56:44'),
-(16, 10, 'files/us/10/fbe00d99aa037f77c511386bd27ca1b8.jpg', 1, 1, '2018-08-22 10:43:35', '2018-08-22 10:43:35');
+(17, 11, 'files/us/11/b5b00eb141beddc2ae568d835abb093c.jpg', 1, 1, '2018-09-03 19:06:22', '2018-09-03 19:06:22'),
+(18, 11, 'files/us/11/1c8a13af261defb8507503c6e801fac5.jpg', 1, 1, '2018-09-03 19:06:37', '2018-09-03 19:06:37'),
+(19, 10, 'files/us/10/7b829abc83732fd5547d41c4236b8708.jpg', 1, 1, '2018-09-03 21:35:26', '2018-09-03 21:35:26');
 
 -- --------------------------------------------------------
 
@@ -8719,7 +8730,8 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `country_code`, `user_id`, `category_id`, `post_type_id`, `company_id`, `title`, `description`, `tags`, `price`, `negotiable`, `contact_name`, `email`, `phone`, `phone_hidden`, `address`, `city_id`, `lon`, `lat`, `ip_addr`, `visits`, `email_token`, `phone_token`, `tmp_token`, `verified_email`, `verified_phone`, `reviewed`, `featured`, `archived`, `fb_profile`, `partner`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (9, 'US', 1, 20, 5, 5, 'Web developer', '<p>lorem dgfddgfd<br></p>', 'tag', '100.00', 1, 'Admin admin', 'dummy@gmail.com', '08000000092', NULL, NULL, 5145215, 73.8988, 40.9312, '127.0.0.1', 0, NULL, NULL, NULL, 1, 1, 0, 0, 0, NULL, NULL, '2018-08-21 05:56:36', '2018-08-21 05:56:46', NULL),
-(10, 'US', 1, 48, 4, 0, 'Unirine test that is reasonable to tes your shittiy ass', '<p>lore m epojas daskdjhak sd<br></p>', 'test', '100.00', NULL, 'name', 'dummy@gmail.com', '08000000092', NULL, NULL, 4776222, 76.2852, 36.8468, '127.0.0.1', 2, NULL, NULL, NULL, 1, 1, 0, 0, 0, NULL, NULL, '2018-08-22 10:43:24', '2018-08-25 09:59:36', NULL);
+(10, 'US', 1, 48, 4, 0, 'Unirine test that is reasonable to tes your shittiy ass', '<p>lore m epojas daskdjhak sd<br></p>', 'test', '100.00', NULL, 'name', 'dummy@gmail.com', '08000000092', NULL, NULL, 4776222, 76.2852, 36.8468, '127.0.0.1', 4, NULL, NULL, NULL, 1, 1, 0, 0, 0, NULL, NULL, '2018-08-22 10:43:24', '2018-09-07 12:34:06', NULL),
+(11, 'US', 1, 48, 5, 6, 'Web developer', '<p>description<br></p>', 'test', '100.00', 1, 'Admin admin', 'dummy@gmail.com', '08000000092', NULL, NULL, 5368361, 118.244, 34.0522, '127.0.0.1', 5, NULL, NULL, NULL, 1, 1, 0, 0, 0, NULL, NULL, '2018-09-03 19:06:11', '2018-09-07 12:33:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -8940,7 +8952,7 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` (`id`, `key`, `name`, `value`, `description`, `field`, `parent_id`, `lft`, `rgt`, `depth`, `active`, `created_at`, `updated_at`) VALUES
 (1, 'app', 'Application', '{\"purchase_code\":\"f2102079-449b-4afd-981d-8db76bc9d904\",\"name\":\"ABDE\",\"slogan\":\"ABDE\",\"email\":\"alabamustapha@gmail.com\"}', 'Application Setup', NULL, 0, 2, 3, 1, 1, NULL, NULL),
 (2, 'style', 'Style', NULL, 'Style Customization', NULL, 0, 4, 5, 1, 1, NULL, NULL),
-(3, 'listing', 'Listing & Search', NULL, 'Listing & Search Options', NULL, 0, 6, 7, 1, 1, NULL, NULL),
+(3, 'listing', 'Listing & Search', '{\"display_mode\":\".list-view\",\"grid_view_cols\":\"4\",\"items_per_page\":\"12\",\"left_sidebar\":\"0\",\"cities_extended_searches\":\"1\",\"search_distance_max\":\"500\",\"search_distance_default\":\"50\",\"search_distance_interval\":\"100\"}', 'Listing & Search Options', NULL, 0, 6, 7, 1, 1, NULL, NULL),
 (4, 'single', 'Ads Single Page', '{\"pictures_limit\":\"5\",\"tags_limit\":\"15\",\"guests_can_post_ads\":\"1\",\"posts_review_activation\":\"0\",\"guests_can_contact_seller\":\"1\",\"simditor_wysiwyg\":\"1\",\"ckeditor_wysiwyg\":\"0\",\"show_post_on_googlemap\":\"0\",\"activation_facebook_comments\":\"1\"}', 'Ads Single Page Options', NULL, 0, 8, 9, 1, 1, NULL, NULL),
 (5, 'mail', 'Mail', '{\"email_sender\":\"alabamustapha@gmail.com\",\"driver\":\"mail\"}', 'Mail Sending Configuration', NULL, 0, 10, 11, 1, 1, NULL, NULL),
 (6, 'sms', 'SMS', NULL, 'SMS Sending Configuration', NULL, 0, 12, 13, 1, 1, NULL, NULL),
@@ -12653,11 +12665,18 @@ CREATE TABLE `users` (
   `user_type_id` int(10) UNSIGNED DEFAULT NULL,
   `gender_id` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `about` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `about` mediumtext COLLATE utf8_unicode_ci,
   `phone` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone_hidden` tinyint(1) UNSIGNED DEFAULT '0',
   `username` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `img_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country_id` int(10) UNSIGNED DEFAULT NULL,
+  `city_id` int(10) UNSIGNED DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fax` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `is_admin` tinyint(1) UNSIGNED DEFAULT '0',
@@ -12684,8 +12703,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `country_code`, `language_code`, `user_type_id`, `gender_id`, `name`, `about`, `phone`, `phone_hidden`, `username`, `email`, `password`, `remember_token`, `is_admin`, `can_be_impersonated`, `disable_comments`, `receive_newsletter`, `receive_advice`, `ip_addr`, `provider`, `provider_id`, `email_token`, `phone_token`, `verified_email`, `verified_phone`, `blocked`, `closed`, `last_login_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'US', NULL, 1, 1, 'Alaba Mustapha', 'Administrator', NULL, 0, NULL, 'alabamustapha@gmail.com', '$2y$10$SDQLng3blag5RGpxHoNXmu0F8VWo3rf38oH3onTIXyi4gaOWAF5/2', 'IeVuuodp3CdRrFlEsbJzt9AM4LnJOzOBU5Pa8yc2RXNrwAzSVtkr0u5AluFO', 1, 1, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 0, 0, '2018-08-29 09:27:19', NULL, '2018-08-29 17:27:19', NULL);
+INSERT INTO `users` (`id`, `country_code`, `language_code`, `user_type_id`, `gender_id`, `name`, `about`, `phone`, `phone_hidden`, `username`, `img_url`, `email`, `country_id`, `city_id`, `address`, `fax`, `website`, `facebook`, `password`, `remember_token`, `is_admin`, `can_be_impersonated`, `disable_comments`, `receive_newsletter`, `receive_advice`, `ip_addr`, `provider`, `provider_id`, `email_token`, `phone_token`, `verified_email`, `verified_phone`, `blocked`, `closed`, `last_login_at`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'US', NULL, 1, 1, 'Alaba Mustapha', 'I`m a kind of persons that I always follows my dreams, From the early stages of my life I`m dreaming about getting a high grad education in which I fulfill my technical knowledge and skills to make an academic achievement.', '08095034525', NULL, 'alabamustapha', 'files/profile//319322ae624b371793147d04edc59244.jpg', 'alabamustapha@gmail.com', 235, 0, 'House 110, Supreme Court Quarters Karu, Abuja', '422323', 'http://alabamustapha.wordpress.com', 'http://alabamustapha.wordpress.com', '$2y$10$SDQLng3blag5RGpxHoNXmu0F8VWo3rf38oH3onTIXyi4gaOWAF5/2', 'IeVuuodp3CdRrFlEsbJzt9AM4LnJOzOBU5Pa8yc2RXNrwAzSVtkr0u5AluFO', 1, 1, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 0, 0, '2018-09-07 04:41:46', NULL, '2018-09-07 13:44:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -13189,13 +13208,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `post_types`

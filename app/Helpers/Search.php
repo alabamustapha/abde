@@ -516,7 +516,7 @@ class Search
         $this->arrSql->where['a.user_id'] = ' = :userId';
         $this->bindings['userId'] = $userId;
         $this->bindings['companyId'] = $companyId;
-
+        
         
         return $this;
     }

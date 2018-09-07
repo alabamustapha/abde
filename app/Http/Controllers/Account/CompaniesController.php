@@ -21,12 +21,14 @@ use App\Models\Post;
 // use App\Models\Post;
 use App\Helpers\Search;
 use App\Models\Company;
+use App\Models\Country;
 use App\Models\Scopes\VerifiedScope;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests\AddCompanyRequest;
 use Illuminate\Http\Request as HttpRequest;
 use Torann\LaravelMetaTags\Facades\MetaTag;
+use App\Http\Requests\UpdateCompanyContactRequest;
 use App\Http\Controllers\Search\Traits\PreSearchTrait;
 
 class CompaniesController extends AccountBaseController
@@ -80,6 +82,7 @@ class CompaniesController extends AccountBaseController
         $data['user_id'] = auth()->user()->id;
         $data['type'] = 'my-companies';
         $data['company'] = $company;
+        $data['countries'] = \DB::table('countries')->select(['id', 'name', 'code'])->get();
         
         // Meta Tags
         MetaTag::set('title', t('Add company'));
@@ -110,6 +113,14 @@ class CompaniesController extends AccountBaseController
 
         
         $company->save();
+        return back();
+    }
+    
+    public function updateContact(UpdateCompanyContactRequest $request, Company $company){
+        
+
+        $company->update($request->except(['_token', 'countryCode', 'user_id']));
+        
         return back();
     }
 

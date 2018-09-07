@@ -199,6 +199,11 @@ class Country extends BaseModel
     {
         return $this->belongsTo(Continent::class, 'continent_code', 'code');
     }
+ 
+    // public function companies()
+    // {
+    //     return $this->hasMany(Company::class, 'country_id', 'id');
+    // }
     
     /*
     |--------------------------------------------------------------------------

@@ -31,7 +31,6 @@ use Creativeorange\Gravatar\Facades\Gravatar;
 use App\Http\Controllers\Auth\Traits\VerificationTrait;
 use App\Helpers\Localization\Country as CountryLocalization;
 use App\Helpers\Localization\Helpers\Country as CountryLocalizationHelper;
-use Intervention\Image\Facades\Image;
 
 class EditController extends AccountBaseController
 {
@@ -64,7 +63,8 @@ class EditController extends AccountBaseController
 		})->where('user_id', auth()->user()->id)
 			->count();
 		
-			
+		$data['countries'] = \DB::table('countries')->select(['id', 'name', 'code'])->get();
+
 		// Meta Tags
 		MetaTag::set('title', t('My account'));
 		MetaTag::set('description', t('My account on :app_name', ['app_name' => config('settings.app.app_name')]));
@@ -109,6 +109,7 @@ class EditController extends AccountBaseController
 	 */
 	public function updateDetails(UserRequest $request)
 	{
+		
 		// Check if these fields has changed
 		$emailChanged = $request->filled('email') && $request->input('email') != auth()->user()->email;
 		$phoneChanged = $request->filled('phone') && $request->input('phone') != auth()->user()->phone;
@@ -149,6 +150,14 @@ class EditController extends AccountBaseController
 			session(['emailOrPhoneChanged' => true]);
 		}
 		
+		$user->country_id = $request->country_id;
+		$user->city_id = $request->city_id;
+		$user->address = $request->address;
+		$user->fax = $request->fax;
+		$user->website = $request->website;
+		$user->facebook = $request->facebook;
+		$user->about = $request->about;
+	
 		// Save
 		$user->save();
 		
@@ -173,6 +182,8 @@ class EditController extends AccountBaseController
 			// Go to Phone Number verification
 			$nextUrl = config('app.locale') . '/verify/user/phone/';
 		}
+
+
 		
 		// Redirection
 		return redirect($nextUrl);
