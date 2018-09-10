@@ -34,7 +34,7 @@
 			padding-top: 25px;
 		}
 		.profile-description > p{
-			font-weight: lighter;
+			/* font-weight: lighter; */
 			text-align: left;
 		}
 		.profile-info-row{
@@ -75,9 +75,6 @@
 			list-style: circle;
 		}
 
-		ul.sub-skills li{
-			font-weight: lighter;
-		}
 
 		.skills-list{
 			padding-left: 70px;
@@ -134,7 +131,7 @@
 											<img class="img-responsive" src="{{ asset('storage/' . $company->logo) }}" alt="">
 											<h3 class="text-primary profile-name">{{ $company->name }}</h3>
 											<span>Location: <strong class="text-primary">{{ $companyLocation }}</strong></span><br>
-											<span>Joined: <strong>{{ $company->created_at->diffForHumans() }}<strong></span>
+											<span>Joined: <strong>{{ $company->created_at->diffForHumans() }}</strong></span>
 
 												
 										</div>

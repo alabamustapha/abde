@@ -3,11 +3,11 @@ if (!isset($cacheExpiration)) {
     $cacheExpiration = (int)config('settings.other.cache_expiration');
 }
 if (config('settings.listing.display_mode') == '.compact-view') {
-	$colDescBox = 'col-sm-10';
-	$colPriceBox = 'col-sm-4';
+	$colDescBox = 'col-xs-10';
+	$colPriceBox = 'col-xs-4';
 } else {
-	$colDescBox = 'col-sm-8';
-	$colPriceBox = 'col-sm-4';
+	$colDescBox = 'col-xs-8';
+	$colPriceBox = 'col-xs-3';
 }
 ?>
 @if (isset($posts) and count($posts) > 0)
@@ -124,7 +124,7 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 							@endif
 						@endif
 						
-						<div class="col-sm-1 no-padding photobox">
+						<div class="col-xs-1 no-padding photobox">
 							<div class="add-image">
 								<!-- <span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span> -->
 								<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
