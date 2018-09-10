@@ -129,12 +129,13 @@
 
 													$p_user = \App\Models\User::where('id', $post->user_id)->first();
 
-													if(!empty($p_user->gravatar)){
-														$postUserImg = $p_user->gravatar;
-													}else{
-														$postUserImg = url('images/user.jpg');
-
-													}
+														if(!is_null($p_user->img_url)){
+															$postUserImg = asset('storage/' . $p_user->img_url);
+														}elseif(!empty($p_user->gravatar)){
+															$postUserImg = $p_user->gravatar;
+														}else{
+															$postUserImg = url('images/user.jpg');
+														}
 															
 
 												}	

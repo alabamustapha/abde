@@ -82,6 +82,8 @@ Route::group([
 		CRUD::resource('advertisings', 'AdvertisingController');
 		CRUD::resource('blacklists', 'BlacklistController');
 		CRUD::resource('categories', 'CategoryController');
+		CRUD::resource('skills', 'SkillController');
+		CRUD::resource('skills/{skillId}/subskills', 'SubSkillController');
 		CRUD::resource('categories/{catId}/subcategories', 'SubCategoryController');
 		CRUD::resource('categories/{catId}/custom_fields', 'CategoryFieldController');
 		CRUD::resource('p_types/{postTypeId}/custom_fields', 'PostTypeFieldController');
@@ -317,6 +319,7 @@ Route::group([
 			Route::get('account/my-companies/create', 'CompaniesController@create');
 			Route::put('account/my-companies/{company}', 'CompaniesController@update')->name('update_company');
 			Route::put('account/my-companies/{company}/contact', 'CompaniesController@updateContact')->name('update_company_contact');
+			Route::put('account/my-companies/{company}/skills', 'CompaniesController@updateSkills')->name('update_company_skills');
 			Route::get('account/my-companies/{company}/edit', 'CompaniesController@edit');
 			Route::delete('account/my-companies/{company}', 'CompaniesController@destroy')->name('delete_company');
 			Route::post('account/my-companies', 'CompaniesController@addCompany')->name('add_company');

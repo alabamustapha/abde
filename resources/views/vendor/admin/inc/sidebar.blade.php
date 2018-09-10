@@ -39,6 +39,7 @@
 				<!-- ==== Recommended place for admin menu items ==== -->
 				<!-- ================================================ -->
 				<li><a href="{{ admin_url('dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('admin::messages.dashboard') }}</span></a></li>
+				<li><a href="{{ admin_url('skills') }}"><i class="fa fa-wrench"></i> <span>{{ trans('admin::messages.Skills') }}</span></a></li>
 				
 				@if (
 					auth()->user()->can('list-post') ||

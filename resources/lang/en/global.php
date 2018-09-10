@@ -545,6 +545,7 @@ return [
     'Photo' => 'Photo',
     'Option' => 'Option',
     'About me' => 'About me',
+    'Skills' => 'Skills',
     'Back' => 'Back',
     'Back to the Item' => 'Back to the Item',
     'Report for :title' => 'Report for ":title"',

@@ -15,6 +15,7 @@
 
 namespace App\Models;
 
+use App\Models\Skill;
 use App\Models\Country;
 use Larapen\Admin\app\Models\Crud;
 use Illuminate\Support\Facades\Request;
@@ -70,10 +71,16 @@ class Company extends BaseModel
 		'email',
 		'website',
 		'facebook',
+		'skills',
 		// 'created_at'
 	];
 
 	protected $dates = ['created_at'];
+
+
+	protected $casts = [
+        'skills' => 'array',
+	];
 	
 	/**
 	 * The attributes that should be hidden for arrays
@@ -142,6 +149,17 @@ class Company extends BaseModel
 
 	public function country(){
 		return $this->belongsTo(Country::class, 'country_id');
+	}
+
+	public function getSkillAttribute(){
+		
+		$skills =  Skill::where('parent_id', 0)->pluck('name', 'id')->toArray();
+		
+		return Skill::find($this->skills)->groupBy(function($item, $key) use ($skills){
+			return $skills[$item['parent_id']];
+		}, $preserveKeys = true);
+
+	
 	}
 	
 	

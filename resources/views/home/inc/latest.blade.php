@@ -3,11 +3,11 @@ if (!isset($cacheExpiration)) {
     $cacheExpiration = (int)config('settings.other.cache_expiration');
 }
 if (config('settings.listing.display_mode') == '.compact-view') {
-	$colDescBox = 'col-sm-9';
-	$colPriceBox = 'col-sm-3';
+	$colDescBox = 'col-sm-10';
+	$colPriceBox = 'col-sm-4';
 } else {
-	$colDescBox = 'col-sm-7';
-	$colPriceBox = 'col-sm-3';
+	$colDescBox = 'col-sm-8';
+	$colPriceBox = 'col-sm-4';
 }
 ?>
 @if (isset($posts) and count($posts) > 0)
@@ -69,11 +69,12 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 
 							$p_user = \App\Models\User::where('id', $post->user_id)->first();
 
-							if(!empty($p_user->gravatar)){
+							if(!is_null($p_user->img_url)){
+								$postUserImg = asset('storage/' . $p_user->img_url);
+							}elseif(!empty($p_user->gravatar)){
 								$postUserImg = $p_user->gravatar;
 							}else{
 								$postUserImg = url('images/user.jpg');
-
 							}
 									
 
@@ -123,7 +124,7 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 							@endif
 						@endif
 						
-						<div class="col-sm-2 no-padding photobox">
+						<div class="col-sm-1 no-padding photobox">
 							<div class="add-image">
 								<!-- <span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span> -->
 								<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>

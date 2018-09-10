@@ -46,6 +46,44 @@
 		.profile-info-row > .value{
 			font-weight: bold;
 		}
+
+		.skills-list{
+			padding-left: 30px;	
+			padding-right: 30px;	
+		}
+
+		ul.sub-skills{
+			padding-left: 30px;
+		}
+
+		div.profile-divider{
+			padding-left: 35px;
+		}
+
+		.social{
+			position: absolute;
+			left: 50%;
+			bottom: 7px;
+			padding: 0 20px;
+			background-color: #eee;
+		}
+
+		ul.skills{
+			list-style: disc;
+		}
+		ul.sub-skills{
+			list-style: circle;
+		}
+
+		ul.sub-skills li{
+			font-weight: lighter;
+		}
+
+		.skills-list{
+			padding-left: 70px;
+			padding-right: 70px;
+		}
+	
 	</style>
 @endsection
 
@@ -142,6 +180,42 @@
 								</div>
 								</div>
 							</div>
+							<div class="row profile-divider">
+								<div class="container">
+									<div class="col-sm-2 col-md-1">
+										<h2 class="text-primary"><strong>Skills:</strong></h2>
+									</div>
+									<div class="col-sm-10 col-md-10">
+										<hr>
+										<div class="social">	
+											<a href="{{  $company->facebook }}"><span class="fa fa-facebook"></span></a>
+											<a href="{{  $company->twitter }}"><span class="fa fa-twitter"></span></a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row skills-list">
+								
+									@foreach($company->skill as $name => $skill)
+										<div class="col-md-4">
+											<ul class="skills">
+												<li>
+													{{ $name }}
+													<ul class="sub-skills">
+														@foreach($skill as $sub_skill)
+														<li>
+															{{ $sub_skill->name }}
+														</li>
+														@endforeach
+													</ul>
+												</li>
+											</ul>	
+										</div>
+									@endforeach
+								
+							</div>
+
 						</div>
 					
 						

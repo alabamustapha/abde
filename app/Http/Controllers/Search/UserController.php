@@ -104,6 +104,15 @@ class UserController extends BaseController
        
         if($cid && $cid !== ''){
             $data['company'] = Company::with('country')->find($cid);
+
+            // foreach($data['company']->skill as $name => $skill){
+            //     var_dump($name);
+            //      foreach($skill as $sub_skill){
+            //          dd($sub_skill);
+            //      }
+
+                 
+            // }
             $data['companyLocation'] = \DB::table('countries')->select('asciiname')->find($data['company']->country_id);
             
             $data['companyLocation'] = $data['companyLocation']->asciiname;

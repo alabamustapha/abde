@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use App\Helpers\Arr;
 use App\Models\Post;
 // use App\Models\Post;
+use App\Models\Skill;
 use App\Helpers\Search;
 use App\Models\Company;
 use App\Models\Country;
@@ -83,13 +84,30 @@ class CompaniesController extends AccountBaseController
         $data['type'] = 'my-companies';
         $data['company'] = $company;
         $data['countries'] = \DB::table('countries')->select(['id', 'name', 'code'])->get();
+        $skill_counts = Skill::count();
+        $data['skills'] = Skill::with('children')->where('parent_id', 0)->get();
         
+
         // Meta Tags
-        MetaTag::set('title', t('Add company'));
-        MetaTag::set('description', t('Add company on :app_name', ['app_name' => config('settings.app.app_name')]));
+        MetaTag::set('title', t('Edit company'));
+        MetaTag::set('description', t('Edit :company_name', ['company_name' => $company->name]));
 
         return view('account.edit_company', $data);
 
+    }
+
+    public function updateSkills(HttpRequest $request, Company $company){
+        var_dump($company->skills);
+
+        if($request->has('skills')){
+            $company->skills = $request->skills;
+        }else{
+            $company->skills = NULL;
+        }
+        
+        $company->save();
+
+        return back();
     }
 
     public function update(AddCompanyRequest $request, Company $company){
