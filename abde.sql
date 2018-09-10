@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2018 at 04:49 PM
+-- Generation Time: Sep 10, 2018 at 10:43 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -7537,6 +7537,7 @@ CREATE TABLE `companies` (
   `email` varchar(255) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
   `facebook` varchar(255) DEFAULT NULL,
+  `skills` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -7544,11 +7545,11 @@ CREATE TABLE `companies` (
 -- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`id`, `name`, `user_id`, `logo`, `description`, `country_id`, `city_id`, `address`, `phone`, `fax`, `email`, `website`, `facebook`, `created_at`) VALUES
-(5, 'Alaba Mustapha', 1, 'company/1/JotqCd9COvywoGpUpaLS0vRlhJQSe1WlifwV29FE.jpeg', '<p>lods kshdfsd</p>', 235, 5368361, 'House 110, Supreme Court Quarters Karu, Abuja', '08095034525', '422323', 'alabamustapha@gmail.com', 'http://alabamustapha.wordpress.com', 'http://alabamustapha.wordpress.com', '2018-09-06 10:01:15'),
-(6, 'Vitamin', 1, 'company/1/eh1jHs1uBYgOVkllRjRhqqu1kdRUm9WcGF87arK6.jpeg', '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde dolores quibusdam ducimus inventore maxime libero facere reprehenderit harum ipsa tenetur dicta molestiae autem esse, illo nostrum doloremque? Cumque, saepe maiores?</p>', 25, NULL, 'House 110, Supreme Court Quarters Karu, Abuja', '08095034525', '422323', 'alabamustapha@gmail.com', 'http://alabamustapha.wordpress.com', 'http://alabamustapha.wordpress.com', '2018-09-06 10:01:15'),
-(7, 'cMustapha', 1, 'company/1/rvmMW8MCRKTGjoepJ4kGiOBnGMsLWmKh2TKJaeD7.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-09-07 10:01:15'),
-(8, 'Alaba Mustapha', 1, 'company/1/afPNku4qj5GqDtobLMPpANim7EGtLKBqtO0KgDzj.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-09-07 10:01:15');
+INSERT INTO `companies` (`id`, `name`, `user_id`, `logo`, `description`, `country_id`, `city_id`, `address`, `phone`, `fax`, `email`, `website`, `facebook`, `skills`, `created_at`) VALUES
+(5, 'Alaba Mustapha', 1, 'company/1/JotqCd9COvywoGpUpaLS0vRlhJQSe1WlifwV29FE.jpeg', '<p>lods kshdfsd</p>', 235, 5368361, 'House 110, Supreme Court Quarters Karu, Abuja', '08095034525', '422323', 'alabamustapha@gmail.com', 'http://alabamustapha.wordpress.com', 'http://alabamustapha.wordpress.com', '[\"2\"]', '2018-09-06 10:01:15'),
+(6, 'Vitamin', 1, 'company/1/eh1jHs1uBYgOVkllRjRhqqu1kdRUm9WcGF87arK6.jpeg', '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde dolores quibusdam ducimus inventore maxime libero facere reprehenderit harum ipsa tenetur dicta molestiae autem esse, illo nostrum doloremque? Cumque, saepe maiores?</p>', 25, NULL, 'House 110, Supreme Court Quarters Karu, Abuja', '08095034525', '422323', 'alabamustapha@gmail.com', 'http://alabamustapha.wordpress.com', 'http://alabamustapha.wordpress.com', '[\"2\",\"4\"]', '2018-09-06 10:01:15'),
+(7, 'cMustapha', 1, 'company/1/rvmMW8MCRKTGjoepJ4kGiOBnGMsLWmKh2TKJaeD7.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-09-07 10:01:15'),
+(8, 'Alaba Mustapha', 1, 'company/1/afPNku4qj5GqDtobLMPpANim7EGtLKBqtO0KgDzj.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2018-09-07 10:01:15');
 
 -- --------------------------------------------------------
 
@@ -8965,6 +8966,36 @@ INSERT INTO `settings` (`id`, `key`, `name`, `value`, `description`, `field`, `p
 (13, 'other', 'Others', NULL, 'Other Options', NULL, 0, 26, 27, 1, 1, NULL, NULL),
 (14, 'cron', 'Cron', NULL, 'Cron Job', NULL, 0, 28, 29, 1, 1, NULL, NULL),
 (15, 'footer', 'Footer', NULL, 'Pages Footer', NULL, 0, 30, 31, 1, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skills`
+--
+
+CREATE TABLE `skills` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `translation_lang` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `translation_of` int(10) UNSIGNED DEFAULT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT '0',
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `slug` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lft` int(10) UNSIGNED DEFAULT NULL,
+  `rgt` int(10) UNSIGNED DEFAULT NULL,
+  `depth` int(10) UNSIGNED DEFAULT NULL,
+  `type` enum('classified','job-offer','job-search','not-salable') COLLATE utf8_unicode_ci DEFAULT 'classified' COMMENT 'Only select this for parent categories',
+  `active` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`id`, `translation_lang`, `translation_of`, `parent_id`, `name`, `slug`, `lft`, `rgt`, `depth`, `type`, `active`) VALUES
+(1, 'en', NULL, 0, 'Web development', 'web-development', NULL, NULL, NULL, 'classified', 1),
+(2, 'en', NULL, 1, 'PHP', 'php', NULL, NULL, NULL, 'classified', 1),
+(3, 'en', NULL, 0, 'Writing', 'writing', NULL, NULL, NULL, 'classified', 1),
+(4, 'en', NULL, 1, 'Laravel', 'laravel', NULL, NULL, NULL, 'classified', 1);
 
 -- --------------------------------------------------------
 
@@ -13029,6 +13060,16 @@ ALTER TABLE `settings`
   ADD KEY `active` (`active`);
 
 --
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `translation_lang` (`translation_lang`),
+  ADD KEY `translation_of` (`translation_of`),
+  ADD KEY `parent_id` (`parent_id`),
+  ADD KEY `slug` (`slug`);
+
+--
 -- Indexes for table `subadmin1`
 --
 ALTER TABLE `subadmin1`
@@ -13263,6 +13304,12 @@ ALTER TABLE `saved_search`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subadmin1`
