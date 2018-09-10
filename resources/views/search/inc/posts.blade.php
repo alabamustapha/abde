@@ -50,12 +50,16 @@ if (!isset($cacheExpiration)) {
 
 			$p_user = \App\Models\User::where('id', $post->user_id)->first();
 
-			if(!empty($p_user->gravatar)){
+			
+
+			if(!is_null($p_user->img_url)){
+				$postUserImg = asset('storage/' . $p_user->img_url);
+			}elseif(!empty($p_user->gravatar)){
 				$postUserImg = $p_user->gravatar;
 			}else{
 				$postUserImg = url('images/user.jpg');
-
 			}
+		
 					
 
 		}
@@ -114,17 +118,18 @@ if (!isset($cacheExpiration)) {
             @endif
         @endif
 		
-		<div class="col-sm-2 no-padding photobox">
+		<div class="col-xs-2 col-sm-1 no-padding photobox">
 			<div class="add-image">
 				<!-- <span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span> -->
 				<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
-				<a href="{{ lurl($post->uri, $attr) }}">
+				<a href="{{ lurl($post->uri, $attr) }}" class="text-center">
 					<img class="thumbnail no-margin" src="{{ $postUserImg }}" alt="img">
+					<span>{{ $post->company_id ? \App\Models\Company::find($post->company_id)->name : \App\Models\User::find($post->user_id)->name }}</span>
 				</a>
 			</div>
 		</div>
 
-		<div class="col-sm-9 add-desc-box">
+		<div class="col-xs-9 add-desc-box">
 			<div class="add-details">
 				<h5 class="add-title">
 					<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
@@ -159,7 +164,7 @@ if (!isset($cacheExpiration)) {
 			
 		</div>
 
-		<div class="col-sm-3 text-right price-box">
+		<div class="col-xs-3 text-right price-box">
 			<!--<h4 class="item-price">
 				@if (isset($liveCatType) and !in_array($liveCatType, ['non-salable']))
 					@if ($post->price > 0)
@@ -185,6 +190,8 @@ if (!isset($cacheExpiration)) {
 				<a class="btn btn-default btn-sm make-favorite" id="{{ $post->id }}"><i class="fa fa-heart"></i><span> {{ t('Save') }} </span></a>
 			@endif
 		</div>
+
+
 	</div>
 	<?php endforeach; ?>
 @else
