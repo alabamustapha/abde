@@ -50,13 +50,14 @@ if (!isset($cacheExpiration)) {
 
 									$p_user = \App\Models\User::where('id', $post->user_id)->first();
 
-									if(!empty($p_user->gravatar)){
-										$postUserImg = $p_user->gravatar;
-									}else{
-										$postUserImg = url('images/user.jpg');
-
-									}
-											
+										if(!is_null($p_user->img_url)){
+											$postUserImg = asset('storage/' . $p_user->img_url);
+										}elseif(!empty($p_user->gravatar)){
+											$postUserImg = $p_user->gravatar;
+										}else{
+											$postUserImg = url('images/user.jpg');
+										}
+																		
 
 								}
 			
@@ -79,11 +80,11 @@ if (!isset($cacheExpiration)) {
 									$liveCatType = (!empty($liveParentCat)) ? $liveParentCat->type : 'classified';
 								}
 								?>
-								<div class="item">
+								<div class="item" style="width: 105px;">
 									<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
 									<a href="{{ lurl($post->uri, $attr) }}">
 										<span class="item-carousel-thumb">
-											<img class="img-responsive" src="{{ $postUserImg }}" alt="{{ $post->title }}" style="border: 1px solid #e7e7e7; margin-top: 2px;">
+											<img class="img-responsive" src="{{ $postUserImg }}" alt="{{ $post->title }}" style="border: 1px solid #e7e7e7; margin-top: 2px;" width="100">
 										</span>
 										<span class="item-name">{{ str_limit($post->title, 35, '...') }}</span>
 										
