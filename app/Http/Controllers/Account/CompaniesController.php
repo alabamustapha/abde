@@ -68,6 +68,10 @@ class CompaniesController extends AccountBaseController
         $data = [];
         $data['user_id'] = auth()->user()->id;
         $data['type'] = 'my-companies';
+
+        $data['countries'] = \DB::table('countries')->select(['id', 'name', 'code'])->get();
+        $skill_counts = Skill::count();
+        $data['skills'] = Skill::with('children')->where('parent_id', 0)->get();
         
         // Meta Tags
         MetaTag::set('title', t('Add company'));
@@ -97,7 +101,7 @@ class CompaniesController extends AccountBaseController
     }
 
     public function updateSkills(HttpRequest $request, Company $company){
-        var_dump($company->skills);
+        
 
         if($request->has('skills')){
             $company->skills = $request->skills;
@@ -112,6 +116,7 @@ class CompaniesController extends AccountBaseController
 
     public function update(AddCompanyRequest $request, Company $company){
         
+        
         $name =  $request->name;
         
         $description =  $request->description;
@@ -119,6 +124,15 @@ class CompaniesController extends AccountBaseController
         $company->name = $name;
 
         $company->description = $description;
+
+        $company->country_id = $request->country_id;
+        $company->city_id    = $request->city_id;
+        $company->address    = $request->address;
+        $company->phone      = $request->phone;
+        $company->fax        = $request->fax;
+        $company->email      = $request->email;
+        $company->website    = $request->website;
+        $company->facebook   = $request->facebook;
 
         if($request->hasFile('logo') && $request->logo->isValid()){
            
@@ -129,8 +143,15 @@ class CompaniesController extends AccountBaseController
             $company->logo = $path;
         }
 
+        if($request->has('skills')){
+            $company->skills = $request->skills;
+        }else{
+            $company->skills = NULL;
+        }
         
-        // $company->save();
+        $company->save();
+        
+        
         return back();
     }
     
@@ -146,7 +167,7 @@ class CompaniesController extends AccountBaseController
         
         $path = '';
         
-        dd($request->all());
+        
         $company = Company::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -160,6 +181,21 @@ class CompaniesController extends AccountBaseController
 
         $company->logo = $path;
 
+        $company->country_id = $request->country_id;
+        $company->city_id    = $request->city_id;
+        $company->address    = $request->address;
+        $company->phone      = $request->phone;
+        $company->fax        = $request->fax;
+        $company->email      = $request->email;
+        $company->website    = $request->website;
+        $company->facebook   = $request->facebook;
+
+        if($request->has('skills')){
+            $company->skills = $request->skills;
+        }else{
+            $company->skills = NULL;
+        }
+        
         $company->save();
 
         return back()->with('message', 'company added');
