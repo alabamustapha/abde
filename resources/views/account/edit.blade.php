@@ -273,7 +273,7 @@
 												
 												<!-- city_id -->
 												<div id="cityBox" class="form-group required <?php echo (isset($errors) and $errors->has('city_id')) ? 'has-error' : ''; ?>">
-													<label class="col-md-3 control-label" for="city_id">{{ t('City') }} <sup>*</sup></label>
+													<label class="col-md-3 control-label" for="city_id">{{ t('City') }} </label>
 													<div class="col-md-9">
 														<select id="cityId" name="city_id" class="form-control sselecter">
 															<option value="0" {{ (!old('city_id') or old('city_id')==0) ? 'selected="selected"' : '' }}>
@@ -293,13 +293,13 @@
 													</div>
 												</div>
 												
-												<!-- Fax -->
-												<div class="form-group required <?php echo (isset($errors) and $errors->has('fax')) ? 'has-error' : ''; ?>">
-													<label class="col-sm-3 control-label">{{ t('Fax') }}</label>
+												<!-- profession -->
+												<div class="form-group required <?php echo (isset($errors) and $errors->has('profession')) ? 'has-error' : ''; ?>">
+													<label class="col-sm-3 control-label">{{ t('Profession') }}</label>
 													<div class="col-sm-9">
 													<div class="input-group">			
 															<span class="input-group-addon"><i class="icon-print"></i></span>
-															<input id="fax" name="fax" class="form-control" value="{{ $user->fax }}" type="text">
+															<input id="profession" name="profession" class="form-control" value="{{ $user->profession }}" type="text">
 														</div>			
 													</div>
 												</div>

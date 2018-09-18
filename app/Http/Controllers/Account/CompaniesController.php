@@ -129,7 +129,7 @@ class CompaniesController extends AccountBaseController
         $company->city_id    = $request->city_id;
         $company->address    = $request->address;
         $company->phone      = $request->phone;
-        $company->fax        = $request->fax;
+        $company->profession        = $request->profession;
         $company->email      = $request->email;
         $company->website    = $request->website;
         $company->facebook   = $request->facebook;
@@ -185,7 +185,7 @@ class CompaniesController extends AccountBaseController
         $company->city_id    = $request->city_id;
         $company->address    = $request->address;
         $company->phone      = $request->phone;
-        $company->fax        = $request->fax;
+        $company->profession        = $request->profession;
         $company->email      = $request->email;
         $company->website    = $request->website;
         $company->facebook   = $request->facebook;

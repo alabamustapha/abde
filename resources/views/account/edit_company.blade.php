@@ -153,13 +153,13 @@
 													</div>
 												</div>
 												
-												<!-- Fax -->
-												<div class="form-group required <?php echo (isset($errors) and $errors->has('fax')) ? 'has-error' : ''; ?>">
-													<label class="col-sm-3 control-label">{{ t('Fax') }}</label>
+												<!-- profession -->
+												<div class="form-group required <?php echo (isset($errors) and $errors->has('profession')) ? 'has-error' : ''; ?>">
+													<label class="col-sm-3 control-label">{{ t('Profession') }}</label>
 													<div class="col-sm-9">
 													<div class="input-group">			
 															<span class="input-group-addon"><i class="icon-print"></i></span>
-															<input id="fax" name="fax" class="form-control" value="{{ $company->fax }}" type="text">
+															<input id="profession" name="profession" class="form-control" value="{{ $company->profession }}" type="text">
 														</div>			
 													</div>
 												</div>

@@ -67,7 +67,7 @@ class Company extends BaseModel
 		'city_id',
 		'address',
 		'phone',
-		'fax',
+		'profession',
 		'email',
 		'website',
 		'facebook',

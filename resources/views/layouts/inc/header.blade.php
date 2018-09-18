@@ -129,7 +129,7 @@ if (getSegment(1) != trans('routes.countries')) {
 								<li><a href="{{ lurl('account/archived') }}"><i class="icon-folder-close"></i> {{ t('Archived ads') }}</a></li>
 								<li>
 									<a href="{{ lurl('account/conversations') }}">
-										<i class="icon-mail-1"></i> {{ t('Conversations') }}
+										<i class="icon-mail-1"></i> {{ t('Messages') }}
 										<span class="badge badge-important count-conversations-with-new-messages">0</span>
 									</a>
 								</li>

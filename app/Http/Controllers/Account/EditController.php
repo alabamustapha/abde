@@ -153,7 +153,7 @@ class EditController extends AccountBaseController
 		$user->country_id = $request->country_id;
 		$user->city_id = $request->city_id;
 		$user->address = $request->address;
-		$user->fax = $request->fax;
+		$user->profession = $request->profession;
 		$user->website = $request->website;
 		$user->facebook = $request->facebook;
 		$user->about = $request->about;

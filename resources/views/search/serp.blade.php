@@ -50,6 +50,7 @@
 		.skills-list{
 			padding-left: 30px;	
 			padding-right: 30px;	
+			font-weight: bolder;
 		}
 
 		ul.sub-skills{
@@ -57,7 +58,7 @@
 		}
 
 		div.profile-divider{
-			padding-left: 35px;
+			
 		}
 
 		.social{
@@ -73,12 +74,17 @@
 		}
 		ul.sub-skills{
 			list-style: circle;
+			font-weight: lighter;
 		}
 
 
 		.skills-list{
 			padding-left: 70px;
 			padding-right: 70px;
+		}
+
+		div.title{
+			font-weight: bolder;
 		}
 	
 	</style>
@@ -141,7 +147,7 @@
 									</div>
 								</div>
 								<div class="col-md-4" style="padding-top: 15px;">
-									<h2>Contact information</h2>
+									<h2><strong>Contact information</strong></h2>
 									<div class="row profile-info-row">
 										<div class="col-md-6 title">
 											Address:
@@ -160,15 +166,19 @@
 									</div>
 									<div class="row profile-info-row">
 										<div class="col-md-6 title">
-											Fax:
+											Profession:
 										</div>
 										<div class="col-md-6">
-											{{ $company->fax }}
+											{{ $company->profession }}
 										</div>
 									</div>
 									<div class="row profile-info-row">
 										<div class="col-md-6 title">
 											Website:
+											<div>	
+												<a href="{{  $company->facebook }}"><span class="fa fa-facebook"></span></a>
+												<a href="{{  $company->twitter }}"><span class="fa fa-twitter"></span></a>
+											</div>
 										</div>
 										<div class="col-md-6">
 												<a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
@@ -179,16 +189,11 @@
 							</div>
 							<div class="row profile-divider">
 								<div class="container">
-									<div class="col-sm-2 col-md-1">
-										<h2 class="text-primary"><strong>Skills:</strong></h2>
-									</div>
-									<div class="col-sm-10 col-md-10">
+									<div class="col-md-12">
 										<hr>
-										<div class="social">	
-											<a href="{{  $company->facebook }}"><span class="fa fa-facebook"></span></a>
-											<a href="{{  $company->twitter }}"><span class="fa fa-twitter"></span></a>
-										</div>
+										<h2 class="text-primary"><strong>Skills:</strong></h2>	
 									</div>
+									
 								</div>
 							</div>
 
@@ -229,9 +234,7 @@
 											<img class="img-responsive" src="{{ asset('storage/' . $user->img_url) }}" alt="">
 											<h3 class="text-primary profile-name">{{ $user->name }}</h3>
 											<span>Location: <strong class="text-primary">{{ $user->country_code }}</strong></span><br>
-											<span>Joined: <strong>{{ $user->created_at->diffForHumans() }}</strong></span>
-
-												
+											<span>Joined: <strong>{{ $user->created_at->diffForHumans() }}</strong></span>										
 										</div>
 										<div class="col-md-8 profile-description">
 											{!! $user->about !!}
@@ -239,7 +242,7 @@
 									</div>
 								</div>
 								<div class="col-md-4" style="padding-top: 15px;">
-									<h2>Contact information</h2>
+									<h2><strong>Contact information</strong></h2>
 									<div class="row profile-info-row">
 										<div class="col-md-6 title">
 											Address:
@@ -258,10 +261,10 @@
 									</div>
 									<div class="row profile-info-row">
 										<div class="col-md-6 title">
-											Fax:
+											Profession:
 										</div>
 										<div class="col-md-6">
-											{{ $user->fax }}
+											{{ $user->profession }}
 										</div>
 									</div>
 									<div class="row profile-info-row">
@@ -397,6 +400,7 @@
 							<div class="tab-filter {{ $tabFilterHideXs }}">
 								<select id="orderBy" class="selecter" data-style="btn-select" data-width="auto">
 									<option value="{!! qsurl($fullUrlNoParams, request()->except(['orderBy', 'distance'])) !!}">{{ t('Sort by') }}</option>
+									<!--
 									<option{{ (request()->get('orderBy')=='priceAsc') ? ' selected="selected"' : '' }}
 											value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceAsc'])) !!}">
 										{{ t('Price : Low to High') }}
@@ -405,6 +409,7 @@
 											value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceDesc'])) !!}">
 										{{ t('Price : High to Low') }}
 									</option>
+								-->
 									<option{{ (request()->get('orderBy')=='relevance') ? ' selected="selected"' : '' }}
 											value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'relevance'])) !!}">
 										{{ t('Relevance') }}

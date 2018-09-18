@@ -564,6 +564,7 @@ return [
     'Add company' => 'Add company',
     'Contact info' => 'Contact info',
     'Fax' => 'Fax',
+    'Profession' => 'Profession',
     'Website' => 'Website',
     'Facebook' => 'Facebook',
     'Logo' => 'Logo',

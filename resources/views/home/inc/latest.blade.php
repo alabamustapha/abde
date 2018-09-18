@@ -65,6 +65,8 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 
 							$postUserImg = asset('storage/' . $p_company->logo);
 
+							
+
 						} else {
 
 							$p_user = \App\Models\User::where('id', $post->user_id)->first();
@@ -126,9 +128,11 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 						
 						<div class="col-xs-2 col-sm-1 no-padding photobox">
 							<div class="add-image">
-								<!-- <span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span> -->
-								<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?>
-								<a href="{{ lurl($post->uri, $attr) }}" class="text-center">
+								<!-- <span class="photo-count"><i class="fa fa-camera"></i> {{ $pictures->count() }} </span> 
+								<?php $attr = ['slug' => slugify($post->title), 'id' => $post->id]; ?> -->
+								<?php $attr = ['countryCode' => config('country.icode'), 'id' => $post->user_id]; ?>
+								<a href="{{ lurl(trans('routes.v-search-user', $attr), $attr) . '?cid=' . $post->company_id }}" class="text-center">
+								<!-- <a href="{{ lurl($post->uri, $attr) }}" class="text-center"> -->
 									<img class="thumbnail no-margin" src="{{ $postUserImg }}" alt="img">
 									<span>{{ $post->company_id ? \App\Models\Company::find($post->company_id)->name : \App\Models\User::find($post->user_id)->name }}</span>
 								</a>

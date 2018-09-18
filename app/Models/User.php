@@ -100,7 +100,7 @@ class User extends BaseUser
         'img_url',
         'country_id',
         'city_id',
-        'fax',
+        'profession',
         'website',
         'facebook',
         'address',
